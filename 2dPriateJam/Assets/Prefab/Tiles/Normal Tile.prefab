@@ -80,11 +80,17 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3030685360498869779}
   highlight: {fileID: 3686845729630559931}
   moveableTile: {fileID: 6319037125964287171}
+  attackableTile: {fileID: 2335068912193786995}
   isWalkable: 1
   pos: {x: 0, y: 0}
   curUnit: {fileID: 0}
   baseColor: {r: 0.4000089, g: 0.8396226, b: 0.4253712, a: 1}
   offsetColor: {r: 0.25511748, g: 0.5943396, b: 0.27468798, a: 1}
+--- !u!1 &2335068912193786995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6097865157573798096, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}
+  m_PrefabInstance: {fileID: 8428535906846424227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &3030685360498869779 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6842943138604497584, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}

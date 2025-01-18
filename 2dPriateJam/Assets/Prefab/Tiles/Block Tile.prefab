@@ -82,6 +82,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5175307120760791576, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}
   m_PrefabInstance: {fileID: 434310013084379496}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5951791313478271416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6097865157573798096, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}
+  m_PrefabInstance: {fileID: 434310013084379496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &6409183160650535896 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6842943138604497584, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}
@@ -107,6 +112,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6409183160650535896}
   highlight: {fileID: 4743584326316526448}
   moveableTile: {fileID: 2688487001101293832}
+  attackableTile: {fileID: 5951791313478271416}
   isWalkable: 0
   pos: {x: 0, y: 0}
   curUnit: {fileID: 0}

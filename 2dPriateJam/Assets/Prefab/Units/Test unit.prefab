@@ -102,3 +102,4 @@ MonoBehaviour:
   moveRange: 2
   attackRange: 1
   moveType: 0
+  attackType: 1

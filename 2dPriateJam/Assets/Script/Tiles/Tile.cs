@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -10,6 +8,8 @@ public abstract class Tile : MonoBehaviour
     private GameObject highlight;
     [SerializeField]
     private GameObject moveableTile;
+    [SerializeField]
+    private GameObject attackableTile;
     [SerializeField]
     private bool isWalkable;
     private bool isSelected = false;
@@ -22,18 +22,31 @@ public abstract class Tile : MonoBehaviour
         return isWalkable && curUnit == null; 
     }
 
+    public bool AttackAble()
+    {
+        return isWalkable && curUnit != null && curUnit != UnitManager.instance.SelectedUnit;
+    }
+
     public virtual void Init(int x, int y) 
     {
         pos = new Vector2(x, y);
     }
 
-    public void SetSelectable(bool isSelect) 
+    public void SetSelectable(bool isSelect, bool forattack = false) 
     {
         isSelected = isSelect;
-        if(GameManager.instance.GameState != GameState.PlayerTurn)
+        if (GameManager.instance.GameState != GameState.PlayerTurn)
+        {
             moveableTile.SetActive(false);
+            attackableTile.SetActive(false);
+        }
         else
-            moveableTile.SetActive(isSelect);
+        {
+            if(forattack)
+                attackableTile.SetActive(isSelect); 
+            else
+                moveableTile.SetActive(isSelect);
+        }
     }
 
     private void OnMouseEnter()
@@ -64,12 +77,18 @@ public abstract class Tile : MonoBehaviour
             else
             {
                 //do attack here
+                //disable attack range
+                GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
+                //end turn
+                GameManager.instance.ChangeState(GameState.EnemyTurn);
             }
         }
         else if (UnitManager.instance.SelectedUnit != null && isSelected) 
         {
             GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.moveRange, UnitManager.instance.SelectedUnit.moveType, false);
             SetUnit(UnitManager.instance.SelectedUnit);
+            //show attack range
+            GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, true);
         }
     }
 

@@ -9,4 +9,5 @@ public class BaseUnit : MonoBehaviour
     public int moveRange;
     public int attackRange;
     public MoveType moveType;
+    public MoveType attackType;
 }
