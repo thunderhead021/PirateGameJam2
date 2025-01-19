@@ -32,6 +32,7 @@ public class UnitManager : MonoBehaviour
         var player = Instantiate(playerStartUnit.unitPrefab);
         player.isCurControl = true;
         player.gameObject.tag = "Player";
+        player.UpdateHp();
         startTile.SetUnit(player);
         playerUnit = player;
         order.Add(player);
@@ -46,6 +47,7 @@ public class UnitManager : MonoBehaviour
             var unit = Instantiate(GetRandomUnit<BaseUnit>());
             unit.isCurControl = false;
             unit.gameObject.tag = "Enemy";
+            unit.UpdateHp();
             startTile.SetUnit(unit);
             order.Add(unit);
         }

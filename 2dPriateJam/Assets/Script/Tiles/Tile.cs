@@ -77,8 +77,9 @@ public abstract class Tile : MonoBehaviour
             else
             {
                 //do attack here
+                UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
                 //disable attack range
-                GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
+                GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                 //end turn
                 UIManager.instance.turnsDisplay.ChangeTurn();
             }

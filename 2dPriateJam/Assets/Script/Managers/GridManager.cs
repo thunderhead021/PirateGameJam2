@@ -211,6 +211,46 @@ public class GridManager : MonoBehaviour
         if (!haveAttack)
             UIManager.instance.turnsDisplay.ChangeTurn();
     }
+
+    public List<Tile> GetAllAttackableTiles(Tile tile, int range, MoveType moveType)
+    {
+        List<Tile> result = new();
+
+        switch (moveType)
+        {
+            case MoveType.Square:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                        if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                        {
+                            result.Add(neighborTile);
+                        }
+                    }
+                }
+                break;
+            case MoveType.Diamond:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
+                        {
+                            Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                            if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                            {
+                                result.Add(neighborTile);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+
+        return result;
+    }
 }
 
 public enum MoveType 
