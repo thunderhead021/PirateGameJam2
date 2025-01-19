@@ -95,6 +95,46 @@ public class GridManager : MonoBehaviour
         return Tiles.Where( t => (forPlayer ? t.Key.x < width / 2 : t.Key.x > width / 2) && t.Value.WalkAble()).OrderBy(t=>Random.value).First().Value;
     }
 
+    public List<Tile> GetAllMoveableTiles(Tile tile, int range, MoveType moveType) 
+    {
+        List<Tile> result = new();
+
+        switch (moveType) 
+        {
+            case MoveType.Square:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                        if (neighborTile != null && neighborTile.WalkAble())
+                        {
+                            result.Add(neighborTile);
+                        }
+                    }
+                }
+                break;
+            case MoveType.Diamond:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
+                        {
+                            Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                            if (neighborTile != null && neighborTile.WalkAble())
+                            {
+                                result.Add(neighborTile);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+
+        return result;  
+    }
+
     public void SetTilesMoveable(Tile tile, int range, MoveType moveType, bool isSelecting) 
     {
         switch (moveType) 
@@ -169,7 +209,7 @@ public class GridManager : MonoBehaviour
                 break;
         }
         if (!haveAttack)
-            GameManager.instance.ChangeState(GameState.EnemyTurn);
+            UIManager.instance.turnsDisplay.ChangeTurn();
     }
 }
 

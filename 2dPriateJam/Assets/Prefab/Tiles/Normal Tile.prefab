@@ -84,8 +84,8 @@ MonoBehaviour:
   isWalkable: 1
   pos: {x: 0, y: 0}
   curUnit: {fileID: 0}
-  baseColor: {r: 0.4000089, g: 0.8396226, b: 0.4253712, a: 1}
-  offsetColor: {r: 0.25511748, g: 0.5943396, b: 0.27468798, a: 1}
+  baseSprite: {fileID: 21300000, guid: da73f6cdc5f218943bdcad3e2400d0b0, type: 3}
+  offsetSprite: {fileID: 21300000, guid: 84a95ee4308826c47b7c58d4ed5210d9, type: 3}
 --- !u!1 &2335068912193786995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6097865157573798096, guid: 174315107d1ce494e8b5dddef52f76d2, type: 3}

@@ -80,7 +80,7 @@ public abstract class Tile : MonoBehaviour
                 //disable attack range
                 GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                 //end turn
-                GameManager.instance.ChangeState(GameState.EnemyTurn);
+                UIManager.instance.turnsDisplay.ChangeTurn();
             }
         }
         else if (UnitManager.instance.SelectedUnit != null && isSelected) 
