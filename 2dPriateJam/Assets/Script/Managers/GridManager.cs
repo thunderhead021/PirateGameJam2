@@ -14,6 +14,7 @@ public class GridManager : MonoBehaviour
     private Transform cam;
 
     public Dictionary<Vector2, Tile> Tiles;
+    public List<TileRule> tileRules;
     public static GridManager instance;
 
     private void Awake()
@@ -80,6 +81,13 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        if (tileRules.Count > 0)
+        {
+            foreach (Tile tile in Tiles.Values)
+            {
+                UpdateTile(tile);
+            }
+        }
         cam.transform.position = new((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
         GameManager.instance.ChangeState(GameState.SpawnPlayerUnit);
     }
@@ -93,6 +101,46 @@ public class GridManager : MonoBehaviour
     public Tile GetStartTile( bool forPlayer ) 
     {
         return Tiles.Where( t => (forPlayer ? t.Key.x < width / 2 : t.Key.x > width / 2) && t.Value.WalkAble()).OrderBy(t=>Random.value).First().Value;
+    }
+
+    public List<Tile> GetAllMoveableTiles(Tile tile, int range, MoveType moveType) 
+    {
+        List<Tile> result = new();
+
+        switch (moveType) 
+        {
+            case MoveType.Square:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                        if (neighborTile != null && neighborTile.WalkAble())
+                        {
+                            result.Add(neighborTile);
+                        }
+                    }
+                }
+                break;
+            case MoveType.Diamond:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
+                        {
+                            Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                            if (neighborTile != null && neighborTile.WalkAble())
+                            {
+                                result.Add(neighborTile);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+
+        return result;  
     }
 
     public void SetTilesMoveable(Tile tile, int range, MoveType moveType, bool isSelecting) 
@@ -169,7 +217,96 @@ public class GridManager : MonoBehaviour
                 break;
         }
         if (!haveAttack)
-            GameManager.instance.ChangeState(GameState.EnemyTurn);
+            UIManager.instance.turnsDisplay.ChangeTurn();
+    }
+
+    public List<Tile> GetAllAttackableTiles(Tile tile, int range, MoveType moveType)
+    {
+        List<Tile> result = new();
+
+        switch (moveType)
+        {
+            case MoveType.Square:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                        if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                        {
+                            result.Add(neighborTile);
+                        }
+                    }
+                }
+                break;
+            case MoveType.Diamond:
+                for (int x = -range; x <= range; x++)
+                {
+                    for (int y = -range; y <= range; y++)
+                    {
+                        if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
+                        {
+                            Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
+                            if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                            {
+                                result.Add(neighborTile);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+
+        return result;
+    }
+
+    private bool RuleMatch(Tile tile, TileRule tileRule) 
+    {
+        Vector2Int[] neighborOffsets = new Vector2Int[]
+        {
+                new(0, 1),   // Up
+                new(1, 1),   // Up Right
+                new(1, 0),   // Right
+                new(1, -1),  // Bottom Right
+                new(0, -1),  // Bottom 
+                new(-1, -1), // Bottom Left
+                new(-1, 0),  // Left
+                new(-1, 1)   // Up Left
+        };
+
+        TileRuleState[] tileRules = new TileRuleState[]
+        {
+                tileRule.IsTopCenterSameTag   ,   // Up
+                tileRule.IsTopRightSameTag    ,   // Up Right
+                tileRule.IsMiddleRightSameTag ,   // Right
+                tileRule.IsBottomRightSameTag ,   // Bottom Right
+                tileRule.IsBottomCenterSameTag,   // Bottom 
+                tileRule.IsBottomLeftSameTag  ,   // Bottom Left
+                tileRule.IsMiddleLeftSameTag  ,   // Left
+                tileRule.IsTopLeftSameTag         // Up Left
+        };
+
+        for(int i = 0; i < neighborOffsets.Length; i++) 
+        {
+                Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + neighborOffsets[i].x, tile.pos.y + neighborOffsets[i].y));
+                if (tileRules[i] == TileRuleState.Same && neighborTile.isWalkable != tile.isWalkable)
+                    return false;
+                else if(tileRules[i] == TileRuleState.Diffrent && neighborTile.isWalkable == tile.isWalkable)
+                    return false;
+        }
+        return true;
+    }
+
+    private void UpdateTile(Tile tile) 
+    {
+        foreach (TileRule rule in tileRules) 
+        {
+              if (RuleMatch(tile, rule))
+              {
+                  tile.UpdateTile(rule.TileSprite);
+                  break;
+              }
+        }
     }
 }
 

@@ -10,8 +10,7 @@ public abstract class Tile : MonoBehaviour
     private GameObject moveableTile;
     [SerializeField]
     private GameObject attackableTile;
-    [SerializeField]
-    private bool isWalkable;
+    public bool isWalkable;
     private bool isSelected = false;
     [HideInInspector]
     public Vector2 pos;
@@ -30,6 +29,11 @@ public abstract class Tile : MonoBehaviour
     public virtual void Init(int x, int y) 
     {
         pos = new Vector2(x, y);
+    }
+
+    public void UpdateTile(Sprite sprite) 
+    {
+        spriteRenderer.sprite = sprite;
     }
 
     public void SetSelectable(bool isSelect, bool forattack = false) 
@@ -77,10 +81,11 @@ public abstract class Tile : MonoBehaviour
             else
             {
                 //do attack here
+                UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
                 //disable attack range
-                GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
+                GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                 //end turn
-                GameManager.instance.ChangeState(GameState.EnemyTurn);
+                UIManager.instance.turnsDisplay.ChangeTurn();
             }
         }
         else if (UnitManager.instance.SelectedUnit != null && isSelected) 

@@ -5,12 +5,12 @@ using UnityEngine;
 public class GrassTile : Tile
 {
     [SerializeField]
-    private Color baseColor, offsetColor;
+    private Sprite baseSprite, offsetSprite;
 
     public override void Init(int x, int y)
     {
         base.Init(x, y);
         var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-        spriteRenderer.color = isOffset ? baseColor : offsetColor;
+        spriteRenderer.sprite = isOffset ? baseSprite : offsetSprite;
     }
 }

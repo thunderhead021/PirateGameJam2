@@ -9,8 +9,11 @@ public class UnitManager : MonoBehaviour
     public int enemyCountForLevel = 3;
     public ScriptableUnit playerStartUnit;
     public BaseUnit SelectedUnit;
+    [HideInInspector]
+    public BaseUnit playerUnit;
 
     private List<ScriptableUnit> units;
+    private List<BaseUnit> order = new();
 
     private void Awake()
     {
@@ -28,7 +31,11 @@ public class UnitManager : MonoBehaviour
         var startTile = GridManager.instance.GetStartTile(true);
         var player = Instantiate(playerStartUnit.unitPrefab);
         player.isCurControl = true;
+        player.gameObject.tag = "Player";
+        player.UpdateHp();
         startTile.SetUnit(player);
+        playerUnit = player;
+        order.Add(player);
         GameManager.instance.ChangeState(GameState.SpawnEnemyUnits);
     }
 
@@ -39,9 +46,13 @@ public class UnitManager : MonoBehaviour
             var startTile = GridManager.instance.GetStartTile(false);
             var unit = Instantiate(GetRandomUnit<BaseUnit>());
             unit.isCurControl = false;
+            unit.gameObject.tag = "Enemy";
+            unit.UpdateHp();
             startTile.SetUnit(unit);
+            order.Add(unit);
         }
-        GameManager.instance.ChangeState(GameState.PlayerTurn);
+        order.Sort((a, b) => b.speed.CompareTo(a.speed));
+        UIManager.instance.turnsDisplay.Setup(order);
     }
 
     public void SetSelectUnit(BaseUnit unit) 
