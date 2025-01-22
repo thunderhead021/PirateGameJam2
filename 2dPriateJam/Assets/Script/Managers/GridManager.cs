@@ -103,6 +103,11 @@ public class GridManager : MonoBehaviour
         return Tiles.Where( t => (forPlayer ? t.Key.x < width / 2 : t.Key.x > width / 2) && t.Value.WalkAble()).OrderBy(t=>Random.value).First().Value;
     }
 
+    public Tile GetRandomTile()
+    {
+        return Tiles.Where(t => t.Value.WalkAble()).OrderBy(t => Random.value).First().Value;
+    }
+
     public List<Tile> GetAllMoveableTiles(Tile tile, int range, MoveType moveType) 
     {
         List<Tile> result = new();
@@ -179,12 +184,12 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void SetTilesAttackable(Tile tile, int range, MoveType attackType, bool isSelecting)
+    public void SetTilesAttackable(Tile tile, int range, AttackType attackType, bool isSelecting)
     {
         bool haveAttack = false;
         switch (attackType)
         {
-            case MoveType.Square:   
+            case AttackType.Square:   
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -198,7 +203,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 break;
-            case MoveType.Diamond:
+            case AttackType.Diamond:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -220,13 +225,13 @@ public class GridManager : MonoBehaviour
             UIManager.instance.turnsDisplay.ChangeTurn();
     }
 
-    public List<Tile> GetAllAttackableTiles(Tile tile, int range, MoveType moveType)
+    public List<Tile> GetAllAttackableTiles(Tile tile, int range, AttackType moveType)
     {
         List<Tile> result = new();
 
         switch (moveType)
         {
-            case MoveType.Square:
+            case AttackType.Square:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -239,7 +244,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 break;
-            case MoveType.Diamond:
+            case AttackType.Diamond:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -311,6 +316,12 @@ public class GridManager : MonoBehaviour
 }
 
 public enum MoveType 
+{
+    Square,
+    Diamond
+}
+
+public enum AttackType
 {
     Square,
     Diamond

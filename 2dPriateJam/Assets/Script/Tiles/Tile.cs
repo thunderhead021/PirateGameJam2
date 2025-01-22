@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -14,6 +15,9 @@ public abstract class Tile : MonoBehaviour
     private bool isSelected = false;
     [HideInInspector]
     public Vector2 pos;
+    private TileEffect curEffect;
+    [SerializeField]
+    private List<TileEffect> effects;
 
     public BaseUnit curUnit;
     public bool WalkAble()
@@ -26,9 +30,11 @@ public abstract class Tile : MonoBehaviour
         return isWalkable && curUnit != null && curUnit != UnitManager.instance.SelectedUnit;
     }
 
-    public virtual void Init(int x, int y) 
+    public virtual void Init(int x, int y, bool haveEffect = false) 
     {
         pos = new Vector2(x, y);
+        if (haveEffect)
+            SetEffect();
     }
 
     public void UpdateTile(Sprite sprite) 
@@ -111,6 +117,12 @@ public abstract class Tile : MonoBehaviour
         unit.transform.position = transform.position;
         curUnit = unit;
         unit.curTile = this;
+        //apply effect
+    }
+
+    private void SetEffect() 
+    {
+        curEffect = effects[Random.Range(0, effects.Count - 1)];
     }
 
 }

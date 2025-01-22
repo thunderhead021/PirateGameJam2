@@ -13,7 +13,7 @@ public class UnitManager : MonoBehaviour
     public BaseUnit playerUnit;
 
     private List<ScriptableUnit> units;
-    private List<BaseUnit> order = new();
+    public List<BaseUnit> order = new();
 
     private void Awake()
     {
@@ -53,6 +53,22 @@ public class UnitManager : MonoBehaviour
         }
         order.Sort((a, b) => b.speed.CompareTo(a.speed));
         UIManager.instance.turnsDisplay.Setup(order);
+    }
+
+    public void SpawnUnit(bool isEnemy) 
+    {
+        var startTile = GridManager.instance.GetRandomTile();
+        var unit = Instantiate(GetRandomUnit<BaseUnit>());
+        unit.isCurControl = false;
+        if (isEnemy)
+            unit.gameObject.tag = "Enemy";
+        else
+        {
+            unit.isCurControl = true;
+        }
+        unit.UpdateHp();
+        startTile.SetUnit(unit);
+        order.Add(unit);
     }
 
     public void SetSelectUnit(BaseUnit unit) 

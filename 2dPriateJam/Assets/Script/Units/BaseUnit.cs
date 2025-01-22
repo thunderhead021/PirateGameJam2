@@ -12,7 +12,7 @@ public class BaseUnit : MonoBehaviour
     public int moveRange;
     public int attackRange;
     public MoveType moveType;
-    public MoveType attackType;
+    public AttackType attackType;
     public int speed;
     public EnemyBehaviour enemyBehaviour;
     public AttackBehaviour attackBehaviour;
@@ -76,6 +76,7 @@ public class BaseUnit : MonoBehaviour
 
     public void Death() 
     {
+        UnitManager.instance.order.Remove(this);
         Destroy(gameObject);
     }
 
