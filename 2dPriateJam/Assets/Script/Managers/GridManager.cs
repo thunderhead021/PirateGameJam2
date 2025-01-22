@@ -14,13 +14,16 @@ public class GridManager : MonoBehaviour
     private Transform cam;
 
     public Dictionary<Vector2, Tile> Tiles;
-    public List<TileRule> tileRules;
+    private List<TileRule> tileRules;
     public static GridManager instance;
 
     private void Awake()
     {
         if(instance == null)
+        {
             instance = this;
+            tileRules = Resources.LoadAll<TileRule>("Tiles").ToList();
+        }
         else
             Destroy(gameObject);
     }
