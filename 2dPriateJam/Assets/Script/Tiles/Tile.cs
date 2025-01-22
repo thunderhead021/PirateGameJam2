@@ -112,17 +112,28 @@ public abstract class Tile : MonoBehaviour
 
     public void SetUnit(BaseUnit unit) 
     {
-        if(unit.curTile != null)
+        if (unit.curTile != null)
+        {
+            if (unit.curTile.curEffect != null) 
+            {
+                unit.curTile.curEffect.RemoveEffect(unit);
+            }
             unit.curTile.curUnit = null;
+        }
         unit.transform.position = transform.position;
         curUnit = unit;
         unit.curTile = this;
         //apply effect
+        if (curEffect != null) 
+        {
+            curEffect.ApplyEffect(unit);
+        }
     }
 
     private void SetEffect() 
     {
         curEffect = effects[Random.Range(0, effects.Count - 1)];
+        curEffect.gameObject.SetActive(true);
     }
 
 }

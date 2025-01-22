@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField]
-    private int width, height;  
+    private int width, height, numberOfSpecialTiles;  
     [SerializeField]
     private Tile normalTilePrefab;
     [SerializeField]
@@ -79,7 +79,15 @@ public class GridManager : MonoBehaviour
                 bool shouldBeBlockTile = Random.Range(0, 100) > 30;
                 var newTile = Instantiate(shouldBeBlockTile ? normalTilePrefab : blockTilePrefab, new Vector3(x, y), Quaternion.identity);
                 newTile.name = $"Tile {x} {y}";
-                newTile.Init(x,y);
+                
+                if (!shouldBeBlockTile && numberOfSpecialTiles > 0 && Random.Range(0, 100) > 70) 
+                {
+                    newTile.Init(x, y, true);
+                    numberOfSpecialTiles--;
+                }
+                else
+                    newTile.Init(x, y);
+
                 Tiles[new Vector2 (x,y)] = newTile;
             }
         }
