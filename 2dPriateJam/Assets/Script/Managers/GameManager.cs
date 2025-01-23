@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState GameState;
+
+    private List<BaseUnit> playerUnitsList;
+
     private void Awake()
     {
         if (instance == null)
@@ -36,8 +39,11 @@ public class GameManager : MonoBehaviour
                 UnitManager.instance.SpawnEnemyUnits();
                 break;
             case GameState.PlayerTurn:
+                UIManager.instance.SwitchTurn();
                 break;
             case GameState.EnemyTurn:
+                UIManager.instance.SwitchTurn();
+                UnitManager.instance.EnemyTurn();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);

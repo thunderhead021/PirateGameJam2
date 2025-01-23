@@ -76,8 +76,8 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                bool shouldBeBlockTile = Random.Range(0, 100) > 30;
-                var newTile = Instantiate(shouldBeBlockTile ? normalTilePrefab : blockTilePrefab, new Vector3(x, y), Quaternion.identity);
+                bool shouldBeBlockTile = Random.Range(0, 100) > 70;
+                var newTile = Instantiate(shouldBeBlockTile ? blockTilePrefab : normalTilePrefab, new Vector3(x, y), Quaternion.identity, transform);
                 newTile.name = $"Tile {x} {y}";
                 
                 if (!shouldBeBlockTile && numberOfSpecialTiles > 0 && Random.Range(0, 100) > 70) 
@@ -232,8 +232,8 @@ public class GridManager : MonoBehaviour
                 }
                 break;
         }
-        if (!haveAttack)
-            UIManager.instance.turnsDisplay.ChangeTurn();
+        if (!haveAttack && isSelecting)
+            tile.curUnit.Move();
     }
 
     public List<Tile> GetAllAttackableTiles(Tile tile, int range, AttackType moveType)

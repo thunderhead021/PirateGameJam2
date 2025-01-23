@@ -76,7 +76,7 @@ public abstract class Tile : MonoBehaviour
         if(GameManager.instance.GameState != GameState.PlayerTurn)
             return;
 
-        if (curUnit != null)
+        if (curUnit != null && (curUnit.hasMoved || curUnit != UnitManager.instance.SelectedUnit))
         {
             if (curUnit.unitSide == Side.Player)
             {
@@ -90,8 +90,7 @@ public abstract class Tile : MonoBehaviour
                 UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
                 //disable attack range
                 GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
-                //end turn
-                UIManager.instance.turnsDisplay.ChangeTurn();
+                //check for end turn
             }
         }
         else if (UnitManager.instance.SelectedUnit != null && isSelected) 
