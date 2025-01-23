@@ -9,11 +9,10 @@ public class UnitManager : MonoBehaviour
     public int enemyCountForLevel = 3;
     public ScriptableUnit playerStartUnit;
     public BaseUnit SelectedUnit;
-    [HideInInspector]
-    public BaseUnit playerUnit;
 
     private List<ScriptableUnit> units;
-    public List<BaseUnit> order = new();
+    private List<BaseUnit> playerUnits = new();
+    private List<BaseUnit> enemyUnits = new();
 
     private void Awake()
     {
@@ -29,13 +28,12 @@ public class UnitManager : MonoBehaviour
     public void SpawnPlayerUnits() 
     {
         var startTile = GridManager.instance.GetStartTile(true);
-        var player = Instantiate(playerStartUnit.unitPrefab);
+        var player = Instantiate(playerStartUnit.unitPrefab, transform);
         player.unitSide = Side.Player;
         player.gameObject.tag = "Player";
         player.UpdateHp();
         startTile.SetUnit(player);
-        playerUnit = player;
-        order.Add(player);
+        playerUnits.Add(player);
         GameManager.instance.ChangeState(GameState.SpawnEnemyUnits);
     }
 
@@ -44,38 +42,63 @@ public class UnitManager : MonoBehaviour
         for (int i = 0; i < enemyCountForLevel; i++) 
         {
             var startTile = GridManager.instance.GetStartTile(false);
-            var unit = Instantiate(GetRandomUnit<BaseUnit>());
+            var unit = Instantiate(GetRandomUnit<BaseUnit>(), transform);
             unit.unitSide = Side.Enemy;
             unit.gameObject.tag = "Enemy";
             unit.UpdateHp();
             startTile.SetUnit(unit);
-            order.Add(unit);
+            enemyUnits.Add(unit);
         }
-        order.Sort((a, b) => b.speed.CompareTo(a.speed));
-        UIManager.instance.turnsDisplay.Setup(order);
+        GameManager.instance.ChangeState(GameState.PlayerTurn);
     }
 
     public void SpawnUnit(bool isEnemy) 
     {
         var startTile = GridManager.instance.GetRandomTile();
-        var unit = Instantiate(GetRandomUnit<BaseUnit>());    
+        var unit = Instantiate(GetRandomUnit<BaseUnit>(), transform);    
         if (isEnemy)
         {
             unit.unitSide = Side.Enemy;
             unit.gameObject.tag = "Enemy";
+            enemyUnits.Add(unit);
         }
         else
         {
             unit.unitSide = Side.Player;
+            unit.gameObject.tag = "Player";
+            playerUnits.Add(unit);
         }
         unit.UpdateHp();
         startTile.SetUnit(unit);
-        order.Add(unit);
     }
 
     public void SetSelectUnit(BaseUnit unit) 
     {
+        if(SelectedUnit != null)
+            GridManager.instance.SetTilesMoveable(SelectedUnit.curTile, SelectedUnit.moveRange, SelectedUnit.moveType, false);
         SelectedUnit = unit;
+    }
+
+    public BaseUnit GetRandomNotAllyUnit(Side side) 
+    {
+        if (side == Side.Player)
+            return enemyUnits.OrderBy(o => Random.value).First();
+        else
+            return playerUnits.OrderBy(o => Random.value).First();
+    }
+
+    public void EnemyTurn() 
+    {
+        foreach (BaseUnit unit in enemyUnits) 
+        {
+            unit.EnemyMove();
+        }
+        GameManager.instance.ChangeState(GameState.PlayerTurn);
+    }
+
+    public void ResetMove() 
+    {
+
     }
 
     private T GetRandomUnit<T>() where T : BaseUnit 

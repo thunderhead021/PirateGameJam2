@@ -20,7 +20,7 @@ public class BaseUnit : MonoBehaviour
     public bool hasMoved { get; private set; } = false;
 
 
-  public void EnemyMove() 
+    public void EnemyMove() 
     {
         List<Tile> allMoveable = GridManager.instance.GetAllMoveableTiles(curTile, moveRange, moveType);
         switch (enemyBehaviour) 
@@ -55,7 +55,6 @@ public class BaseUnit : MonoBehaviour
                     break;
             }
         }
-        UIManager.instance.turnsDisplay.ChangeTurn();
     }
 
     public void DealDamage(BaseUnit target, int amount) 
@@ -78,7 +77,6 @@ public class BaseUnit : MonoBehaviour
 
     public void Death() 
     {
-        UnitManager.instance.order.Remove(this);
         Destroy(gameObject);
     }
 
@@ -101,7 +99,7 @@ public class BaseUnit : MonoBehaviour
         float shortestDistance = float.MaxValue;
         foreach (Tile tile in tileList)
         {
-            float distance = Vector2.Distance(UnitManager.instance.playerUnit.curTile.pos, tile.pos);
+            float distance = Vector2.Distance(UnitManager.instance.GetRandomNotAllyUnit(unitSide).curTile.pos, tile.pos);
 
             if (distance < shortestDistance)
             {
@@ -122,7 +120,7 @@ public class BaseUnit : MonoBehaviour
         float longestDistance = float.MinValue;
         foreach (Tile tile in tileList)
         {
-            float distance = Vector2.Distance(UnitManager.instance.playerUnit.curTile.pos, tile.pos);
+            float distance = Vector2.Distance(UnitManager.instance.GetRandomNotAllyUnit(unitSide).curTile.pos, tile.pos);
 
             if (distance >= longestDistance)
             {
@@ -149,7 +147,7 @@ public class BaseUnit : MonoBehaviour
                 foreach (GameObject unit in units)
                 {
                     // Calculate the Euclidean distance to the current unit
-                    float distance = Vector2.Distance(UnitManager.instance.playerUnit.curTile.pos, unit.GetComponent<BaseUnit>().curTile.pos);
+                    float distance = Vector2.Distance(UnitManager.instance.GetRandomNotAllyUnit(unitSide).curTile.pos, unit.GetComponent<BaseUnit>().curTile.pos);
 
                     // Update if this tile is closer to any unit
                     if (distance < shortestDistance)
