@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileSprite: {fileID: 21300000, guid: 95f82fe2a638d334fa2fbb73ede4a1da, type: 3}
   isForMovingTile: 0
-  IsTopLeftSameTag: 2
-  IsTopCenterSameTag: 2
-  IsTopRightSameTag: 2
+  IsTopLeftSameTag: 0
+  IsTopCenterSameTag: 0
+  IsTopRightSameTag: 0
   IsMiddleLeftSameTag: 2
   IsMiddleRightSameTag: 2
   IsBottomLeftSameTag: 2

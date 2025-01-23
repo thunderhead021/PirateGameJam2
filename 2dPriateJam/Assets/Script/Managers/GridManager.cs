@@ -304,11 +304,13 @@ public class GridManager : MonoBehaviour
 
         for(int i = 0; i < neighborOffsets.Length; i++) 
         {
-                Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + neighborOffsets[i].x, tile.pos.y + neighborOffsets[i].y));
-                if (tileRules[i] == TileRuleState.Same && neighborTile.isWalkable != tile.isWalkable)
-                    return false;
-                else if(tileRules[i] == TileRuleState.Diffrent && neighborTile.isWalkable == tile.isWalkable)
-                    return false;
+            Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + neighborOffsets[i].x, tile.pos.y + neighborOffsets[i].y));
+            if( tileRule.isForMovingTile != tile.isWalkable)
+                return false;
+            else if( tileRules[i] == TileRuleState.Same && neighborTile != null && neighborTile.isWalkable != tile.isWalkable )
+                return false;
+            else if( tileRules[i] == TileRuleState.Diffrent && neighborTile != null && neighborTile.isWalkable == tile.isWalkable )
+                return false;
         }
         return true;
     }

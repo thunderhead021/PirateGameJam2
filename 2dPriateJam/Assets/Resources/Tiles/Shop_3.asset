@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileSprite: {fileID: 21300000, guid: 8e3e9849d40be2f41a0aa07ff52e46e8, type: 3}
   isForMovingTile: 0
-  IsTopLeftSameTag: 0
-  IsTopCenterSameTag: 0
-  IsTopRightSameTag: 0
-  IsMiddleLeftSameTag: 0
-  IsMiddleRightSameTag: 0
-  IsBottomLeftSameTag: 0
-  IsBottomCenterSameTag: 0
-  IsBottomRightSameTag: 0
+  IsTopLeftSameTag: 2
+  IsTopCenterSameTag: 1
+  IsTopRightSameTag: 1
+  IsMiddleLeftSameTag: 2
+  IsMiddleRightSameTag: 1
+  IsBottomLeftSameTag: 2
+  IsBottomCenterSameTag: 1
+  IsBottomRightSameTag: 1

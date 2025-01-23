@@ -17,8 +17,8 @@ MonoBehaviour:
   IsTopLeftSameTag: 0
   IsTopCenterSameTag: 0
   IsTopRightSameTag: 0
-  IsMiddleLeftSameTag: 0
-  IsMiddleRightSameTag: 0
+  IsMiddleLeftSameTag: 1
+  IsMiddleRightSameTag: 1
   IsBottomLeftSameTag: 0
   IsBottomCenterSameTag: 0
   IsBottomRightSameTag: 0
