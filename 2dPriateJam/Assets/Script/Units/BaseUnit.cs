@@ -6,7 +6,7 @@ public class BaseUnit : MonoBehaviour
 {
     public Tile curTile;
     public Sprite TurnIcon;
-    public bool isCurControl = false;
+    public Side unitSide = Side.None;
     public int Hp = 10;
     public int AttackPower = 2;
     public int moveRange;
@@ -17,8 +17,10 @@ public class BaseUnit : MonoBehaviour
     public EnemyBehaviour enemyBehaviour;
     public AttackBehaviour attackBehaviour;
     public TextMeshPro curHp;
+    public bool hasMoved { get; private set; } = false;
 
-    public void EnemyMove() 
+
+  public void EnemyMove() 
     {
         List<Tile> allMoveable = GridManager.instance.GetAllMoveableTiles(curTile, moveRange, moveType);
         switch (enemyBehaviour) 
@@ -78,6 +80,19 @@ public class BaseUnit : MonoBehaviour
     {
         UnitManager.instance.order.Remove(this);
         Destroy(gameObject);
+    }
+
+    public void Move() 
+    {
+        if (!hasMoved)
+        {
+            hasMoved = true;
+        }
+    }
+
+    public void ResetMove()
+    {
+        hasMoved = false;
     }
 
     private void ChaserMove(List<Tile> tileList) 
@@ -204,4 +219,11 @@ public enum AttackBehaviour
     Focus,
     Spread,
     Random
+}
+
+public enum Side 
+{
+    None,
+    Player,
+    Enemy
 }

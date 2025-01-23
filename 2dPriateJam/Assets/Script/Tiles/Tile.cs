@@ -78,7 +78,7 @@ public abstract class Tile : MonoBehaviour
 
         if (curUnit != null)
         {
-            if (curUnit.isCurControl)
+            if (curUnit.unitSide == Side.Player)
             {
                 UnitManager.instance.SetSelectUnit(curUnit);
                 //show move range
@@ -123,6 +123,7 @@ public abstract class Tile : MonoBehaviour
         unit.transform.position = transform.position;
         curUnit = unit;
         unit.curTile = this;
+        unit.Move();
         //apply effect
         if (curEffect != null) 
         {

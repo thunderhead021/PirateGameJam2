@@ -23,7 +23,7 @@ public class TurnsDisplay : MonoBehaviour
     {
         if (transform.GetChild(0).TryGetComponent<TurnIndicator>(out var nextTurn)) 
         {
-            bool isPlayer = nextTurn.Entity.isCurControl;
+            bool isPlayer = nextTurn.Entity.unitSide == Side.Player;
             GameManager.instance.ChangeState(isPlayer ? GameState.PlayerTurn : GameState.EnemyTurn);
             if (!isPlayer) 
             {

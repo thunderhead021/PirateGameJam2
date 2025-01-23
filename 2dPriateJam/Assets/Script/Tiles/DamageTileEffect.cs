@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+
 public class DamageTileEffect : TileEffect
 {
     public int extraDamage = 1;
@@ -8,7 +10,7 @@ public class DamageTileEffect : TileEffect
         {
             effectApplied = true;
             unit.AttackPower += extraDamage;
-            UnitManager.instance.SpawnUnit(unit.isCurControl);
+            UnitManager.instance.SpawnUnit(unit.unitSide == Side.Player);
         }    
     }
 }
