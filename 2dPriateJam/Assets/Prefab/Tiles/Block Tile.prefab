@@ -115,4 +115,5 @@ MonoBehaviour:
   attackableTile: {fileID: 5951791313478271416}
   isWalkable: 0
   pos: {x: 0, y: 0}
+  effects: []
   curUnit: {fileID: 0}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField]
-    private int width, height;  
+    private int width, height, numberOfSpecialTiles;  
     [SerializeField]
     private Tile normalTilePrefab;
     [SerializeField]
@@ -14,13 +14,16 @@ public class GridManager : MonoBehaviour
     private Transform cam;
 
     public Dictionary<Vector2, Tile> Tiles;
-    public List<TileRule> tileRules;
+    private List<TileRule> tileRules;
     public static GridManager instance;
 
     private void Awake()
     {
         if(instance == null)
+        {
             instance = this;
+            tileRules = Resources.LoadAll<TileRule>("Tiles").ToList();
+        }
         else
             Destroy(gameObject);
     }
@@ -76,7 +79,15 @@ public class GridManager : MonoBehaviour
                 bool shouldBeBlockTile = Random.Range(0, 100) > 30;
                 var newTile = Instantiate(shouldBeBlockTile ? normalTilePrefab : blockTilePrefab, new Vector3(x, y), Quaternion.identity);
                 newTile.name = $"Tile {x} {y}";
-                newTile.Init(x,y);
+                
+                if (!shouldBeBlockTile && numberOfSpecialTiles > 0 && Random.Range(0, 100) > 70) 
+                {
+                    newTile.Init(x, y, true);
+                    numberOfSpecialTiles--;
+                }
+                else
+                    newTile.Init(x, y);
+
                 Tiles[new Vector2 (x,y)] = newTile;
             }
         }
@@ -101,6 +112,11 @@ public class GridManager : MonoBehaviour
     public Tile GetStartTile( bool forPlayer ) 
     {
         return Tiles.Where( t => (forPlayer ? t.Key.x < width / 2 : t.Key.x > width / 2) && t.Value.WalkAble()).OrderBy(t=>Random.value).First().Value;
+    }
+
+    public Tile GetRandomTile()
+    {
+        return Tiles.Where(t => t.Value.WalkAble()).OrderBy(t => Random.value).First().Value;
     }
 
     public List<Tile> GetAllMoveableTiles(Tile tile, int range, MoveType moveType) 
@@ -179,12 +195,12 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void SetTilesAttackable(Tile tile, int range, MoveType attackType, bool isSelecting)
+    public void SetTilesAttackable(Tile tile, int range, AttackType attackType, bool isSelecting)
     {
         bool haveAttack = false;
         switch (attackType)
         {
-            case MoveType.Square:   
+            case AttackType.Square:   
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -198,7 +214,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 break;
-            case MoveType.Diamond:
+            case AttackType.Diamond:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -220,13 +236,13 @@ public class GridManager : MonoBehaviour
             UIManager.instance.turnsDisplay.ChangeTurn();
     }
 
-    public List<Tile> GetAllAttackableTiles(Tile tile, int range, MoveType moveType)
+    public List<Tile> GetAllAttackableTiles(Tile tile, int range, AttackType moveType)
     {
         List<Tile> result = new();
 
         switch (moveType)
         {
-            case MoveType.Square:
+            case AttackType.Square:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -239,7 +255,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 break;
-            case MoveType.Diamond:
+            case AttackType.Diamond:
                 for (int x = -range; x <= range; x++)
                 {
                     for (int y = -range; y <= range; y++)
@@ -311,6 +327,12 @@ public class GridManager : MonoBehaviour
 }
 
 public enum MoveType 
+{
+    Square,
+    Diamond
+}
+
+public enum AttackType
 {
     Square,
     Diamond

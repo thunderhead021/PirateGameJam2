@@ -13,7 +13,7 @@ public class UnitManager : MonoBehaviour
     public BaseUnit playerUnit;
 
     private List<ScriptableUnit> units;
-    private List<BaseUnit> order = new();
+    public List<BaseUnit> order = new();
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class UnitManager : MonoBehaviour
     {
         var startTile = GridManager.instance.GetStartTile(true);
         var player = Instantiate(playerStartUnit.unitPrefab);
-        player.isCurControl = true;
+        player.unitSide = Side.Player;
         player.gameObject.tag = "Player";
         player.UpdateHp();
         startTile.SetUnit(player);
@@ -45,7 +45,7 @@ public class UnitManager : MonoBehaviour
         {
             var startTile = GridManager.instance.GetStartTile(false);
             var unit = Instantiate(GetRandomUnit<BaseUnit>());
-            unit.isCurControl = false;
+            unit.unitSide = Side.Enemy;
             unit.gameObject.tag = "Enemy";
             unit.UpdateHp();
             startTile.SetUnit(unit);
@@ -53,6 +53,24 @@ public class UnitManager : MonoBehaviour
         }
         order.Sort((a, b) => b.speed.CompareTo(a.speed));
         UIManager.instance.turnsDisplay.Setup(order);
+    }
+
+    public void SpawnUnit(bool isEnemy) 
+    {
+        var startTile = GridManager.instance.GetRandomTile();
+        var unit = Instantiate(GetRandomUnit<BaseUnit>());    
+        if (isEnemy)
+        {
+            unit.unitSide = Side.Enemy;
+            unit.gameObject.tag = "Enemy";
+        }
+        else
+        {
+            unit.unitSide = Side.Player;
+        }
+        unit.UpdateHp();
+        startTile.SetUnit(unit);
+        order.Add(unit);
     }
 
     public void SetSelectUnit(BaseUnit unit) 
