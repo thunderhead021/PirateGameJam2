@@ -27,7 +27,7 @@ public abstract class Tile : MonoBehaviour
 
     public bool AttackAble()
     {
-        return isWalkable && curUnit != null && curUnit != UnitManager.instance.SelectedUnit;
+        return isWalkable && curUnit != null && curUnit != UnitManager.instance.SelectedUnit && curUnit.unitSide != UnitManager.instance.SelectedUnit.unitSide;
     }
 
     public virtual void Init(int x, int y, bool haveEffect = false) 
@@ -76,30 +76,41 @@ public abstract class Tile : MonoBehaviour
         if(GameManager.instance.GameState != GameState.PlayerTurn)
             return;
 
-        if (curUnit != null && (curUnit.hasMoved || curUnit != UnitManager.instance.SelectedUnit))
+        if (curUnit != null)
         {
-            if (curUnit.unitSide == Side.Player)
+            //show info
+
+            if (!curUnit.hasMoved || curUnit != UnitManager.instance.SelectedUnit) 
             {
-                UnitManager.instance.SetSelectUnit(curUnit);
-                //show move range
-                GridManager.instance.SetTilesMoveable(this, curUnit.moveRange, curUnit.moveType, true);
-            }
-            else
-            {
-                //do attack here
-                UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
-                //disable attack range
-                GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
-                //check for end turn
+                if (curUnit.unitSide == Side.Player)
+                {
+                    if (!curUnit.hasMoved) 
+                    {
+                        UnitManager.instance.SetSelectUnit(curUnit);
+                        //show move range
+                        GridManager.instance.SetTilesMoveable(this, curUnit.moveRange, curUnit.moveType, true);
+                    }
+                }
+                else if (curUnit.unitSide == Side.Enemy && isSelected)
+                {
+                    //do attack here
+                    UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
+                    //disable attack range
+                    GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
+                }
             }
         }
         else if (UnitManager.instance.SelectedUnit != null && isSelected) 
         {
             GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.moveRange, UnitManager.instance.SelectedUnit.moveType, false);
             SetUnit(UnitManager.instance.SelectedUnit);
-            //show attack range
+            UnitManager.instance.SelectedUnit.Move();
             GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, true);
         }
+
+        //check for end turn
+        if (UnitManager.instance.IsAutoEndTurn())
+            GameManager.instance.ChangeState(GameState.EnemyTurn);
     }
 
     private void Update()
@@ -122,7 +133,6 @@ public abstract class Tile : MonoBehaviour
         unit.transform.position = transform.position;
         curUnit = unit;
         unit.curTile = this;
-        unit.Move();
         //apply effect
         if (curEffect != null) 
         {

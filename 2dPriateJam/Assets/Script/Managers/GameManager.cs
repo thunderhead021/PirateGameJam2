@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.GenerateGrid);
     }
 
+    public void EndPlayerTurn() 
+    {
+        ChangeState(GameState.EnemyTurn);
+    }
+
     public void ChangeState(GameState state) 
     {
         GameState = state;
@@ -40,6 +45,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.PlayerTurn:
                 UIManager.instance.SwitchTurn();
+                UnitManager.instance.ResetMove();
                 break;
             case GameState.EnemyTurn:
                 UIManager.instance.SwitchTurn();

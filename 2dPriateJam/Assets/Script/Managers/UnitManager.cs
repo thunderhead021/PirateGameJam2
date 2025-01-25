@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +6,7 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager instance;
     public int enemyCountForLevel = 3;
+    public int playerCountForLevel = 3;
     public ScriptableUnit playerStartUnit;
     public BaseUnit SelectedUnit;
 
@@ -27,13 +27,16 @@ public class UnitManager : MonoBehaviour
 
     public void SpawnPlayerUnits() 
     {
-        var startTile = GridManager.instance.GetStartTile(true);
-        var player = Instantiate(playerStartUnit.unitPrefab, transform);
-        player.unitSide = Side.Player;
-        player.gameObject.tag = "Player";
-        player.UpdateHp();
-        startTile.SetUnit(player);
-        playerUnits.Add(player);
+        for (int i = 0; i < playerCountForLevel; i++) 
+        {
+            var startTile = GridManager.instance.GetStartTile(true);
+            var player = Instantiate(playerStartUnit.unitPrefab, transform);
+            player.unitSide = Side.Player;
+            player.gameObject.tag = "Player";
+            player.UpdateHp();
+            startTile.SetUnit(player);
+            playerUnits.Add(player);
+        }
         GameManager.instance.ChangeState(GameState.SpawnEnemyUnits);
     }
 
@@ -73,9 +76,12 @@ public class UnitManager : MonoBehaviour
     }
 
     public void SetSelectUnit(BaseUnit unit) 
-    {
-        if(SelectedUnit != null)
+    { 
+        if (SelectedUnit != null)
+        {
             GridManager.instance.SetTilesMoveable(SelectedUnit.curTile, SelectedUnit.moveRange, SelectedUnit.moveType, false);
+            GridManager.instance.SetTilesAttackable(SelectedUnit.curTile, SelectedUnit.attackRange, SelectedUnit.attackType, false);
+        }
         SelectedUnit = unit;
     }
 
@@ -98,7 +104,50 @@ public class UnitManager : MonoBehaviour
 
     public void ResetMove() 
     {
+        foreach (BaseUnit checkUnit in playerUnits)
+        {
+            checkUnit.ResetMove();
+        }
+        foreach (BaseUnit checkUnit in enemyUnits)
+        {
+            checkUnit.ResetMove();
+        }
+    }
 
+    public void RemoveUnit(BaseUnit unit) 
+    {
+        if (unit.unitSide == Side.Player) 
+        {
+            foreach (BaseUnit checkUnit in playerUnits) 
+            {
+                if (checkUnit == unit) 
+                {
+                    playerUnits.Remove(checkUnit);
+                    break;
+                }
+            }
+        }
+        else 
+        {
+            foreach (BaseUnit checkUnit in enemyUnits)
+            {
+                if (checkUnit == unit)
+                {
+                    enemyUnits.Remove(checkUnit);
+                    break;
+                }
+            }
+        }
+    }
+
+    public bool IsAutoEndTurn() 
+    {
+        foreach (BaseUnit unit in playerUnits) 
+        {
+            if(!unit.hasMoved)
+                return false;
+        }
+        return true;
     }
 
     private T GetRandomUnit<T>() where T : BaseUnit 
