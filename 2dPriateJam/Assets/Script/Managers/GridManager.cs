@@ -122,6 +122,7 @@ public class GridManager : MonoBehaviour
     public List<Tile> GetAllMoveableTiles(Tile tile, int range, MoveType moveType) 
     {
         List<Tile> result = new();
+        List<int> blockXs = new();
 
         switch (moveType) 
         {
@@ -131,9 +132,12 @@ public class GridManager : MonoBehaviour
                     for (int y = -range; y <= range; y++)
                     {
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                        if (neighborTile != null && neighborTile.WalkAble())
+                        if (neighborTile != null )
                         {
-                            result.Add(neighborTile);
+                            if (neighborTile.WalkAble() && !blockXs.Contains(x))
+                                result.Add(neighborTile);
+                            else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                blockXs.Add(x);
                         }
                     }
                 }
@@ -146,9 +150,12 @@ public class GridManager : MonoBehaviour
                         if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
                         {
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                            if (neighborTile != null && neighborTile.WalkAble())
+                            if (neighborTile != null)
                             {
-                                result.Add(neighborTile);
+                                if(neighborTile.WalkAble() && !blockXs.Contains(x))
+                                    result.Add(neighborTile);
+                                else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                    blockXs.Add(x);
                             }
                         }
                     }
@@ -161,6 +168,8 @@ public class GridManager : MonoBehaviour
 
     public void SetTilesMoveable(Tile tile, int range, MoveType moveType, bool isSelecting) 
     {
+        List<int> blockXs = new();
+
         switch (moveType) 
         {
             case MoveType.Square:
@@ -169,9 +178,12 @@ public class GridManager : MonoBehaviour
                     for (int y = -range; y <= range; y++) 
                     {
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                        if (neighborTile != null && neighborTile.WalkAble()) 
+                        if (neighborTile != null) 
                         {
-                            neighborTile.SetSelectable(isSelecting);
+                            if (neighborTile.WalkAble() && !blockXs.Contains(x))
+                                neighborTile.SetSelectable(isSelecting);
+                            else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                blockXs.Add(x);
                         }
                     }
                 }
@@ -184,9 +196,12 @@ public class GridManager : MonoBehaviour
                         if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
                         {
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                            if (neighborTile != null && neighborTile.WalkAble())
+                            if (neighborTile != null)
                             {
-                                neighborTile.SetSelectable(isSelecting);
+                                if (neighborTile.WalkAble() && !blockXs.Contains(x))
+                                    neighborTile.SetSelectable(isSelecting);
+                                else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                    blockXs.Add(x);
                             }
                         }
                     }
@@ -195,9 +210,11 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void SetTilesAttackable(Tile tile, int range, AttackType attackType, bool isSelecting)
+    public void SetTilesAttackable(Tile tile, int range, AttackType attackType, bool isSelecting, bool callFromCode = true)
     {
         bool haveAttack = false;
+        List<int> blockXs = new();
+
         switch (attackType)
         {
             case AttackType.Square:   
@@ -206,10 +223,15 @@ public class GridManager : MonoBehaviour
                     for (int y = -range; y <= range; y++)
                     {
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                        if (neighborTile != null && neighborTile.AttackAble())
+                        if (neighborTile != null)
                         {
-                            haveAttack = true;
-                            neighborTile.SetSelectable(isSelecting, true);
+                            if (neighborTile.AttackAble() && !blockXs.Contains(x))
+                            {
+                                haveAttack = true;
+                                neighborTile.SetSelectable(isSelecting, true);
+                            }
+                            else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                blockXs.Add(x);
                         }
                     }
                 }
@@ -222,24 +244,34 @@ public class GridManager : MonoBehaviour
                         if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
                         {
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                            if (neighborTile != null && neighborTile.AttackAble())
+                            if (neighborTile != null)
                             {
-                                haveAttack = true;
-                                neighborTile.SetSelectable(isSelecting, true);
+                                if (neighborTile.AttackAble() && !blockXs.Contains(x))
+                                {
+                                    haveAttack = true;
+                                    neighborTile.SetSelectable(isSelecting, true);
+                                }
+                                else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                    blockXs.Add(x);
                             }
                         }
                     }
                 }
                 break;
         }
-        if (!haveAttack && isSelecting)
+        if (!haveAttack && isSelecting && callFromCode)
             tile.curUnit.Move();
+    }
+
+    public void ShowUnitAttackRange() 
+    {
+        SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, true, false);
     }
 
     public List<Tile> GetAllAttackableTiles(Tile tile, int range, AttackType moveType)
     {
         List<Tile> result = new();
-
+        List<int> blockXs = new();
         switch (moveType)
         {
             case AttackType.Square:
@@ -248,9 +280,15 @@ public class GridManager : MonoBehaviour
                     for (int y = -range; y <= range; y++)
                     {
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                        if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                        if (neighborTile != null)
                         {
-                            result.Add(neighborTile);
+                            if (neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy") && !blockXs.Contains(x) )
+                            {
+                                result.Add(neighborTile);
+                            }
+                            else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                blockXs.Add(x);
+                            
                         }
                     }
                 }
@@ -263,9 +301,15 @@ public class GridManager : MonoBehaviour
                         if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
                         {
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
-                            if (neighborTile != null && neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy"))
+                            if (neighborTile != null)
                             {
-                                result.Add(neighborTile);
+                                if (neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy") && !blockXs.Contains(x))
+                                {
+                                    result.Add(neighborTile);
+                                }
+                                else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
+                                    blockXs.Add(x);
+
                             }
                         }
                     }
