@@ -5,8 +5,6 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager instance;
-    public int enemyCountForLevel = 3;
-    public int playerCountForLevel = 3;
     public ScriptableUnit playerStartUnit;
     public BaseUnit SelectedUnit;
 
@@ -25,27 +23,35 @@ public class UnitManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void SpawnPlayerUnits() 
+    public void ResetLevel()
+    {
+        while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
+    }
+
+    public void SpawnPlayerUnits(int playerCountForLevel, List<BaseUnit> playerUnitsPool) 
     {
         for (int i = 0; i < playerCountForLevel; i++) 
         {
             var startTile = GridManager.instance.GetStartTile(true);
-            var player = Instantiate(playerStartUnit.unitPrefab, transform);
-            player.unitSide = Side.Player;
-            player.gameObject.tag = "Player";
-            player.UpdateHp();
-            startTile.SetUnit(player);
-            playerUnits.Add(player);
+            BaseUnit unit = Instantiate(playerUnitsPool.OrderBy(o => Random.value).First(), transform);
+            unit.unitSide = Side.Player;
+            unit.gameObject.tag = "Player";
+            unit.UpdateHp();
+            startTile.SetUnit(unit);
+            playerUnits.Add(unit);
         }
         GameManager.instance.ChangeState(GameState.SpawnEnemyUnits);
     }
 
-    public void SpawnEnemyUnits()
+    public void SpawnEnemyUnits(int enemyCountForLevel, List<BaseUnit> enemyUnitsPool)
     {
         for (int i = 0; i < enemyCountForLevel; i++) 
         {
             var startTile = GridManager.instance.GetStartTile(false);
-            var unit = Instantiate(GetRandomUnit<BaseUnit>(), transform);
+            BaseUnit unit = Instantiate(enemyUnitsPool.OrderBy(o => Random.value).First(), transform);
             unit.unitSide = Side.Enemy;
             unit.gameObject.tag = "Enemy";
             unit.UpdateHp();
@@ -116,6 +122,7 @@ public class UnitManager : MonoBehaviour
 
     public void RemoveUnit(BaseUnit unit) 
     {
+        LevelState levelState = LevelState.Playing;
         if (unit.unitSide == Side.Player) 
         {
             foreach (BaseUnit checkUnit in playerUnits) 
@@ -126,6 +133,8 @@ public class UnitManager : MonoBehaviour
                     break;
                 }
             }
+            if(playerUnits.Count == 0)
+                levelState = LevelState.Lose;
         }
         else 
         {
@@ -137,7 +146,23 @@ public class UnitManager : MonoBehaviour
                     break;
                 }
             }
+            if (enemyUnits.Count == 0)
+                levelState = LevelState.Win;
         }
+
+        switch (levelState) 
+        {
+            case LevelState.Playing:
+                Destroy(unit.gameObject);
+                break;
+            case LevelState.Lose:
+                UIManager.instance.GameOver();
+                break;
+            case LevelState.Win:
+                GameManager.instance.NextLevel();
+                break;
+        }
+        
     }
 
     public bool IsAutoEndTurn() 
@@ -155,4 +180,11 @@ public class UnitManager : MonoBehaviour
         return (T)units.OrderBy(o => Random.value).First().unitPrefab;
     }
 
+}
+
+public enum LevelState 
+{
+    Playing,
+    Win,
+    Lose
 }

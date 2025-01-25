@@ -78,7 +78,6 @@ public class BaseUnit : MonoBehaviour
     public void Death() 
     {
         UnitManager.instance.RemoveUnit(this);
-        Destroy(gameObject);
     }
 
     public void Move() 

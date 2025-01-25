@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField]
-    private int width, height, numberOfSpecialTiles;  
+    private int width, height;  
     [SerializeField]
     private Tile normalTilePrefab;
     [SerializeField]
@@ -28,10 +28,18 @@ public class GridManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void GenerateGrid() 
+    public void ResetLevel() 
+    {
+        while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
+    }
+
+    public void GenerateGrid(int blockPercentage, int numberOfSpecialTiles) 
     {
         Tiles = new();
-
+        #region commented
         //hexagon flat top
         //float hexWidth = 1.0f; 
         //float hexHeight = Mathf.Sqrt(3) / 2.0f * hexWidth; 
@@ -70,13 +78,14 @@ public class GridManager : MonoBehaviour
         //    }
         //}
 
-
+        #endregion
+        
         //Normal
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                bool shouldBeBlockTile = Random.Range(0, 100) > 70;
+                bool shouldBeBlockTile = Random.Range(0, 100) > (100 - blockPercentage);
                 var newTile = Instantiate(shouldBeBlockTile ? blockTilePrefab : normalTilePrefab, new Vector3(x, y), Quaternion.identity, transform);
                 newTile.name = $"Tile {x} {y}";
                 

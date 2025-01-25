@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 
     public RectTransform playerTurn;
     public RectTransform enemyTurn;
+    public GameObject gameOverScreen;
 
     private void Awake()
     {
@@ -13,6 +14,16 @@ public class UIManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+    }
+
+    public void GameOver() 
+    {
+        gameOverScreen.SetActive(true);
+    }
+
+    public void NewGame() 
+    {
+        gameOverScreen.SetActive(false);
     }
 
     public void SwitchTurn() 
