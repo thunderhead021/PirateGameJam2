@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6438725473495300146
+--- !u!1001 &5274680056649317543
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,22 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-      propertyPath: Hp
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-      propertyPath: TurnIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
-    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-      propertyPath: attackRange
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1944237986996834122, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -66,22 +50,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Name
-      value: Test unit 2
+      value: Blocker
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.b
-      value: 0.2208971
+      value: 0.083364405
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.g
-      value: 0.2208971
+      value: 0.8584906
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.r
-      value: 0.6415094
+      value: 0.06074225
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2300418288628502375}
   m_SourcePrefab: {fileID: 100100000, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+--- !u!1 &7990521099151400055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+  m_PrefabInstance: {fileID: 5274680056649317543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2300418288628502375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990521099151400055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1e6baf7089c3b4d8f8856a6788dab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curTile: {fileID: 0}
+  TurnIcon: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
+  unitSide: 0
+  Hp: 5
+  AttackPower: 0
+  moveRange: 0
+  attackRange: 0
+  moveType: 0
+  attackType: 0
+  speed: 3
+  enemyBehaviour: 2
+  attackBehaviour: 0
+  curHp: {fileID: 9095368561271147222}
+--- !u!114 &9095368561271147222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3966070472100673137, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+  m_PrefabInstance: {fileID: 5274680056649317543}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
