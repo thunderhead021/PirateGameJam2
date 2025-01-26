@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5274680056649317543
+--- !u!1001 &6933867361904032211
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,19 +50,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Name
-      value: Blocker
+      value: Mother ship
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.b
-      value: 0.083364405
+      value: 0.90713406
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.g
-      value: 0.8584906
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.r
-      value: 0.06074225
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
@@ -71,43 +71,43 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2300418288628502375}
+      addedObject: {fileID: -5374919591636645189}
   m_SourcePrefab: {fileID: 100100000, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
---- !u!1 &7990521099151400055 stripped
+--- !u!1 &5182920426567981315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-  m_PrefabInstance: {fileID: 5274680056649317543}
+  m_PrefabInstance: {fileID: 6933867361904032211}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2300418288628502375
+--- !u!114 &-5374919591636645189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7990521099151400055}
+  m_GameObject: {fileID: 5182920426567981315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f1e6baf7089c3b4d8f8856a6788dab5, type: 3}
+  m_Script: {fileID: 11500000, guid: ad3e6d246e49c0141b3b550d6b2b45e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curTile: {fileID: 0}
-  TurnIcon: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
+  TurnIcon: {fileID: 21300000, guid: 64e8ba6a46fcde248a3ea483e97aed00, type: 3}
   unitSide: 0
-  Hp: 5
+  Hp: 10
   AttackPower: 0
-  moveRange: 5
+  moveRange: 2
   attackRange: 0
-  moveType: 0
+  moveType: 1
   attackType: 0
   AttackEffect: 0
-  speed: 3
-  enemyBehaviour: 2
+  speed: 0
+  enemyBehaviour: 1
   attackBehaviour: 0
-  curHp: {fileID: 9095368561271147222}
---- !u!114 &9095368561271147222 stripped
+  curHp: {fileID: 6282622309543907234}
+--- !u!114 &6282622309543907234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3966070472100673137, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-  m_PrefabInstance: {fileID: 5274680056649317543}
+  m_PrefabInstance: {fileID: 6933867361904032211}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

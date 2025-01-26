@@ -120,6 +120,16 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    public void ApplyStatus(bool forEnemy) 
+    {
+        var unitsList = forEnemy ? enemyUnits : playerUnits;
+        for (int i = 0; i < unitsList.Count; i++) 
+        {
+            var unit = forEnemy ? enemyUnits[i] : playerUnits[i];
+            unit.CheckStatus();
+        }
+    }
+
     public void RemoveUnit(BaseUnit unit) 
     {
         LevelState levelState = LevelState.Playing;

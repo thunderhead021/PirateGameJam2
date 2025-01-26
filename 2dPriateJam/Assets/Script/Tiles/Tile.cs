@@ -94,7 +94,7 @@ public abstract class Tile : MonoBehaviour
                 else if (curUnit.unitSide == Side.Enemy && isSelected)
                 {
                     //do attack here
-                    UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower);
+                    UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower, UnitManager.instance.SelectedUnit.AttackEffect);
                     //disable attack range
                     GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                 }

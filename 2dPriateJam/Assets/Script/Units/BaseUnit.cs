@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BaseUnit : MonoBehaviour
 {
@@ -13,11 +14,15 @@ public class BaseUnit : MonoBehaviour
     public int attackRange;
     public MoveType moveType;
     public AttackType attackType;
+    public AttackEffect AttackEffect;
+    private HashSet<UnitStatus> curStatus = new();
     public int speed;
     public EnemyBehaviour enemyBehaviour;
     public AttackBehaviour attackBehaviour;
     public TextMeshPro curHp;
     public bool hasMoved { get; private set; } = false;
+
+    private int posionedTurn = 0;   
 
 
     public void EnemyMove() 
@@ -51,13 +56,13 @@ public class BaseUnit : MonoBehaviour
                     SpreadAttack(allAttackable);
                     break;
                 case AttackBehaviour.Random:
-                    DealDamage(allAttackable[Random.Range(0, allAttackable.Count - 1)].curUnit, AttackPower);
+                    DealDamage(allAttackable[Random.Range(0, allAttackable.Count - 1)].curUnit, AttackPower, AttackEffect);
                     break;
             }
         }
     }
 
-    public void DealDamage(BaseUnit target, int amount) 
+    public void DealDamage(BaseUnit target, int amount, AttackEffect attackEffect) 
     {
         target.Hp -= amount;
         if (target.Hp <= 0)
@@ -67,6 +72,44 @@ public class BaseUnit : MonoBehaviour
         else 
         {
             target.UpdateHp();
+            target.ApplyStatus(attackEffect);
+        }
+    }
+
+    public void ApplyStatus(AttackEffect attackEffect) 
+    {
+        switch (attackEffect) 
+        {
+            case AttackEffect.Dot:
+                curStatus.Add(UnitStatus.Posion);
+                posionedTurn = 2;
+                break;
+        }
+    }
+
+    public void CheckStatus() 
+    {
+        foreach (UnitStatus status in curStatus) 
+        {
+            switch (status) 
+            {
+                case UnitStatus.Posion:
+                    Hp -= 1;
+                    if (Hp <= 0)
+                    {
+                        Death();
+                    }
+                    else
+                    {
+                        UpdateHp();
+                        posionedTurn--;
+                    }
+                    break;
+            }
+        }
+        if (posionedTurn <= 0)
+        {
+            curStatus.Remove(UnitStatus.Posion);
         }
     }
 
@@ -75,7 +118,7 @@ public class BaseUnit : MonoBehaviour
         curHp.text = Hp.ToString();
     }
 
-    public void Death() 
+    public virtual void Death() 
     {
         UnitManager.instance.RemoveUnit(this);
     }
@@ -179,7 +222,7 @@ public class BaseUnit : MonoBehaviour
 
         if (target != null) 
         {
-            DealDamage(target, AttackPower);
+            DealDamage(target, AttackPower, AttackEffect);
         }
     }
 
@@ -198,7 +241,7 @@ public class BaseUnit : MonoBehaviour
 
         if (target != null)
         {
-            DealDamage(target, AttackPower);
+            DealDamage(target, AttackPower, AttackEffect);
         }
     }
 
@@ -224,4 +267,16 @@ public enum Side
     None,
     Player,
     Enemy
+}
+
+public enum UnitStatus 
+{
+    Normal,
+    Posion
+}
+
+public enum AttackEffect
+{
+    Normal,
+    Dot
 }

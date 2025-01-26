@@ -64,10 +64,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.PlayerTurn:
                 UIManager.instance.SwitchTurn();
+                UnitManager.instance.ApplyStatus(false);
                 UnitManager.instance.ResetMove();
                 break;
             case GameState.EnemyTurn:
                 UIManager.instance.SwitchTurn();
+                UnitManager.instance.ApplyStatus(true);
                 UnitManager.instance.EnemyTurn();
                 break;
             default:

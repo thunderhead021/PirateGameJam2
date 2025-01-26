@@ -11,7 +11,7 @@ public class MovementTileEffect : TileEffect
             effectApplied = true;
         }
         else
-            unit.DealDamage(unit, damage);
+            unit.DealDamage(unit, damage, AttackEffect.Normal);
     }
 
     public override void RemoveEffect(BaseUnit unit)
