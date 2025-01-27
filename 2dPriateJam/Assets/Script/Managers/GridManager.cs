@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -12,9 +13,17 @@ public class GridManager : MonoBehaviour
     private Tile blockTilePrefab;
     [SerializeField]
     private Transform cam;
-
+    [SerializeField]
+    private GameObject Wall1;
+    [SerializeField]
+    private GameObject Wall1Left;
+    [SerializeField]
+    private GameObject Wall1Right;
+    [SerializeField]
+    private GameObject Wall2;
     public Dictionary<Vector2, Tile> Tiles;
-    private List<TileRule> tileRules;
+    private List<TileRule> blockTileRules;
+    private List<TileRule> normalTileRules;
     public static GridManager instance;
 
     private void Awake()
@@ -22,7 +31,8 @@ public class GridManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            tileRules = Resources.LoadAll<TileRule>("Tiles").ToList();
+            normalTileRules = Resources.LoadAll<TileRule>("Floor Tiles").ToList();
+            blockTileRules = Resources.LoadAll<TileRule>("Block Tiles").ToList();
         }
         else
             Destroy(gameObject);
@@ -81,34 +91,54 @@ public class GridManager : MonoBehaviour
         #endregion
         
         //Normal
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < width + 2; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < height + 2; y++)
             {
-                bool shouldBeBlockTile = Random.Range(0, 100) > (100 - blockPercentage);
-                var newTile = Instantiate(shouldBeBlockTile ? blockTilePrefab : normalTilePrefab, new Vector3(x, y), Quaternion.identity, transform);
-                newTile.name = $"Tile {x} {y}";
-                
-                if (!shouldBeBlockTile && numberOfSpecialTiles > 0 && Random.Range(0, 100) > 70) 
+                if (y == 0 || (y == height && (x >= 1 && x <= width)))
                 {
-                    newTile.Init(x, y, true);
-                    numberOfSpecialTiles--;
+                    var wall2 = Instantiate(Wall2, new Vector3(x, y), Quaternion.identity, transform);
+                    wall2.name = $"Tile {x} {y}"; 
                 }
-                else
-                    newTile.Init(x, y);
+                else if (x == width + 1 && (y >= 1 && y <= height))
+                {
+                    var wall1right = Instantiate(Wall1Right, new Vector3(x, y), Wall1Right.transform.rotation, transform);
+                    wall1right.name = $"Tile {x} {y}";
+                }
+                else if (x == 0 && (y >= 1 && y <= height))
+                {
+                    var wall1left = Instantiate(Wall1Left, new Vector3(x, y), Wall1Left.transform.rotation, transform);
+                    wall1left.name = $"Tile {x} {y}";
+                }
+                else if ((y == 1 && (x >= 1 && x <= width)) || (y == height + 1 && (x >= 0 && x <= width + 2))) 
+                {
+                    var wall1 = Instantiate(Wall1, new Vector3(x, y), Quaternion.identity, transform);
+                    wall1.name = $"Tile {x} {y}";
+                }
+                else 
+                {
+                    bool shouldBeBlockTile = Random.Range(0, 100) > (100 - blockPercentage);
+                    var newTile = Instantiate(shouldBeBlockTile ? blockTilePrefab : normalTilePrefab, new Vector3(x, y), Quaternion.identity, transform);
+                    newTile.name = $"Tile {x} {y}";
 
-                Tiles[new Vector2 (x,y)] = newTile;
+                    if (!shouldBeBlockTile && numberOfSpecialTiles > 0 && Random.Range(0, 100) > 70)
+                    {
+                        newTile.Init(x, y, true);
+                        numberOfSpecialTiles--;
+                    }
+                    else
+                        newTile.Init(x, y);
+
+                    Tiles[new Vector2(x, y)] = newTile;
+                } 
             }
         }
 
-        if (tileRules.Count > 0)
+        foreach (Tile tile in Tiles.Values)
         {
-            foreach (Tile tile in Tiles.Values)
-            {
-                UpdateTile(tile);
-            }
+            UpdateTile(tile);
         }
-        cam.transform.position = new((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
+        cam.transform.position = new((float)(width + 2) /2 - 0.5f, (float)(height + 2) /2 - 0.5f, -10);
         GameManager.instance.ChangeState(GameState.SpawnPlayerUnit);
     }
 
@@ -370,14 +400,26 @@ public class GridManager : MonoBehaviour
 
     private void UpdateTile(Tile tile) 
     {
-        foreach (TileRule rule in tileRules) 
+        if (tile.isWalkable) 
         {
-              if (RuleMatch(tile, rule))
-              {
-                  tile.UpdateTile(rule.TileSprite);
-                  break;
-              }
+            int rand = Random.Range(0, 100);
+            int index = rand <= 50 ? 0 : rand <= 75 ? 1 : rand <= 95 ? 2 : 3;
+            tile.UpdateTile(normalTileRules[index].TileSprite);
         }
+        else 
+        {
+            if(blockTileRules.Count > 0) 
+            {
+                foreach (TileRule rule in blockTileRules)
+                {
+                    if (RuleMatch(tile, rule))
+                    {
+                        tile.UpdateTile(rule.TileSprite);
+                        break;
+                    }
+                }
+            }
+        } 
     }
 }
 

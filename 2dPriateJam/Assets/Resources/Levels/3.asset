@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38a3576a01bd4384389e321edf469942, type: 3}
-  m_Name: 1
+  m_Name: 3
   m_EditorClassIdentifier: 
-  percentageOfBlockingTileOutOf100: 10
-  maxNumberOfSpecialTiles: 0
-  numberOfEnemies: 2
+  percentageOfBlockingTileOutOf100: 15
+  maxNumberOfSpecialTiles: 5
+  numberOfEnemies: 4
   numberOfPlayerUnits: 1
   playerUnitsPool:
   - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
   enemyUnitsPool:
-  - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
+  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 2300418288628502375, guid: 4a35f7ef1b57b834998d632b64b7964f, type: 3}

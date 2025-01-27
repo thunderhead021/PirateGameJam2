@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
                 UnitManager.instance.SpawnPlayerUnits(levels[curLevel].numberOfPlayerUnits, levels[curLevel].playerUnitsPool);
                 break;
             case GameState.SpawnEnemyUnits:
-                UnitManager.instance.SpawnEnemyUnits(levels[curLevel].numberOfPlayerUnits, levels[curLevel].enemyUnitsPool);
+                UnitManager.instance.SpawnEnemyUnits(levels[curLevel].numberOfEnemies, levels[curLevel].enemyUnitsPool);
                 break;
             case GameState.PlayerTurn:
                 UIManager.instance.SwitchTurn();

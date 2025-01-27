@@ -1092,7 +1092,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1619,6 +1619,10 @@ MonoBehaviour:
   normalTilePrefab: {fileID: 124157257826554210, guid: 0de69112d5b1b4740ad413e759c28e2e, type: 3}
   blockTilePrefab: {fileID: 1362553117185104092, guid: 3f950aac77ec18042b65d1fcbc47e956, type: 3}
   cam: {fileID: 519420032}
+  Wall1: {fileID: 2044373780094601892, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+  Wall1Left: {fileID: 2692994198287861529, guid: 8dae2bbaf1288a44ebf70b31303cce81, type: 3}
+  Wall1Right: {fileID: 7282579547717765723, guid: 9acb91b74acc57c49a6b10aeb6f07fcb, type: 3}
+  Wall2: {fileID: 4380812678080704320, guid: 13849901ce193fc4190455bfa28c74ea, type: 3}
 --- !u!1 &802275118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,7 +2649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062a8e1ccca32e449b832fbee76e1c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStartUnit: {fileID: 11400000, guid: 8b7559470da46b94484ca812de17f9f5, type: 2}
+  playerStartUnit: {fileID: 11400000, guid: 2a01482898dd67549bd998b1f08f9070, type: 2}
   SelectedUnit: {fileID: 0}
 --- !u!1 &1369478904
 GameObject:
