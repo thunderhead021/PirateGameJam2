@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a3576a01bd4384389e321edf469942, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  percentageOfBlockingTileOutOf100: 10
+  percentageOfBlockingTileOutOf100: 24
   maxNumberOfSpecialTiles: 0
   numberOfEnemies: 2
   numberOfPlayerUnits: 1
