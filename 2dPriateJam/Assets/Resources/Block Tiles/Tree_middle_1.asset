@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f9c804cd5e3b32418958e35b7a27794, type: 3}
-  m_Name: 1
+  m_Name: Tree_middle_1
   m_EditorClassIdentifier: 
-  TileSprite: {fileID: 21300000, guid: 14c9e6122bacfb742adf4a24edca5e0a, type: 3}
-  isForMovingTile: 1
-  IsTopLeftSameTag: 0
-  IsTopCenterSameTag: 0
-  IsTopRightSameTag: 0
-  IsMiddleLeftSameTag: 0
-  IsMiddleRightSameTag: 0
-  IsBottomLeftSameTag: 0
-  IsBottomCenterSameTag: 0
-  IsBottomRightSameTag: 0
+  TileSprite: {fileID: 21300000, guid: 6c4f0653ff2db764594c4a81f3c220b4, type: 3}
+  isForMovingTile: 0
+  IsTopLeftSameTag: 2
+  IsTopCenterSameTag: 1
+  IsTopRightSameTag: 2
+  IsMiddleLeftSameTag: 2
+  IsMiddleRightSameTag: 2
+  IsBottomLeftSameTag: 2
+  IsBottomCenterSameTag: 1
+  IsBottomRightSameTag: 2
