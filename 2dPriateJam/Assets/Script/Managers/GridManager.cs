@@ -205,7 +205,7 @@ public class GridManager : MonoBehaviour
         return result;  
     }
 
-    public void SetTilesMoveable(Tile tile, int range, MoveType moveType, bool isSelecting) 
+    public void SetTilesMoveable(Tile tile, int range, MoveType moveType, bool isSelecting, bool forDisplay = false) 
     {
         List<int> blockXs = new();
 
@@ -220,7 +220,7 @@ public class GridManager : MonoBehaviour
                         if (neighborTile != null) 
                         {
                             if (neighborTile.WalkAble() && !blockXs.Contains(x))
-                                neighborTile.SetSelectable(isSelecting);
+                                neighborTile.SetSelectable(isSelecting, forDisplay: forDisplay);
                             else if (neighborTile.curUnit != null && neighborTile.curUnit is BlockerUnit && neighborTile.curUnit.unitSide != tile.curUnit.unitSide)
                                 blockXs.Add(x);
                         }

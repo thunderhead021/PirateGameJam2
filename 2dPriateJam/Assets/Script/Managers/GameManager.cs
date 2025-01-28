@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
                 UnitManager.instance.ResetMove();
                 break;
             case GameState.EnemyTurn:
+                UnitManager.instance.SetSelectUnit();
                 UIManager.instance.SwitchTurn();
                 UnitManager.instance.ApplyStatus(true);
                 UnitManager.instance.EnemyTurn();

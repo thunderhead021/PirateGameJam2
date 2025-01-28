@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     public RectTransform playerTurn;
     public RectTransform enemyTurn;
     public GameObject gameOverScreen;
+    public InfoDisplay infoDisplay;
+    private BaseUnit SelectedUnit;
 
     private void Awake()
     {
@@ -16,11 +18,33 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void GameOver() 
+    public void DisplayInfo(BaseUnit unit, bool active) 
+    {
+        infoDisplay.gameObject.SetActive(active);
+        if(active)
+            infoDisplay.Setup(unit.TurnIcon, unit.AttackPower);
+    }
+
+    public void SetSelectUnit(BaseUnit unit = null)
+    {
+        if (SelectedUnit != null)
+        {
+            SelectedUnit.Select(false);
+            GridManager.instance.SetTilesMoveable(SelectedUnit.curTile, SelectedUnit.moveRange, SelectedUnit.moveType, false, true);
+            DisplayInfo(SelectedUnit, false);
+        }
+        SelectedUnit = unit;
+        if (unit != null)
+        {
+            unit.Select(true);
+            DisplayInfo(unit, true);
+        }
+    }
+
+    public void GameOver()
     {
         gameOverScreen.SetActive(true);
     }
-
     public void NewGame() 
     {
         gameOverScreen.SetActive(false);

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BaseUnit : MonoBehaviour
 {
@@ -22,8 +21,19 @@ public class BaseUnit : MonoBehaviour
     public TextMeshPro curHp;
     public bool hasMoved { get; private set; } = false;
 
-    private int posionedTurn = 0;   
+    private int posionedTurn = 0;
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private Material defaultMaterial;
+    [SerializeField]
+    private Material selectMaterial;
+
+    public void Select(bool isSelect) 
+    {
+        spriteRenderer.material = isSelect ? selectMaterial : defaultMaterial;
+    }
 
     public void EnemyMove() 
     {

@@ -112,6 +112,9 @@ MonoBehaviour:
   enemyBehaviour: 0
   attackBehaviour: 0
   curHp: {fileID: 3966070472100673137}
+  spriteRenderer: {fileID: 8189682455004116233}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}
 --- !u!1 &8923281752416234679
 GameObject:
   m_ObjectHideFlags: 0

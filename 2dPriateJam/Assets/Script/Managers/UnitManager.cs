@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
@@ -81,14 +82,21 @@ public class UnitManager : MonoBehaviour
         startTile.SetUnit(unit);
     }
 
-    public void SetSelectUnit(BaseUnit unit) 
+    public void SetSelectUnit(BaseUnit unit = null) 
     { 
         if (SelectedUnit != null)
         {
+            SelectedUnit.Select(false);
             GridManager.instance.SetTilesMoveable(SelectedUnit.curTile, SelectedUnit.moveRange, SelectedUnit.moveType, false);
             GridManager.instance.SetTilesAttackable(SelectedUnit.curTile, SelectedUnit.attackRange, SelectedUnit.attackType, false);
+            UIManager.instance.DisplayInfo(SelectedUnit, false);
         }
         SelectedUnit = unit;
+        if (unit != null)
+        {
+            unit.Select(true);
+            UIManager.instance.DisplayInfo(unit, true);
+        }
     }
 
     public BaseUnit GetRandomNotAllyUnit(Side side) 
