@@ -20,7 +20,7 @@ public class BaseUnit : MonoBehaviour
     public AttackBehaviour attackBehaviour;
     public TextMeshPro curHp;
     public bool hasMoved { get; private set; } = false;
-
+    private int MaxHp;
     private int posionedTurn = 0;
 
     [SerializeField]
@@ -29,6 +29,21 @@ public class BaseUnit : MonoBehaviour
     private Material defaultMaterial;
     [SerializeField]
     private Material selectMaterial;
+
+    private void Start()
+    {
+        MaxHp = Hp;
+    }
+
+    public void ResetUnit() 
+    {
+        Hp = MaxHp;
+        hasMoved = false;
+        posionedTurn = 0;
+        curStatus.Clear();
+        Select(false);
+        UpdateHp();
+    }
 
     public void Select(bool isSelect) 
     {

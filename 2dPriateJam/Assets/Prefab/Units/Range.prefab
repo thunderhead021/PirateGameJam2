@@ -25,6 +25,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: enemyBehaviour
       value: 3
       objectReference: {fileID: 0}

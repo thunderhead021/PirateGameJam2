@@ -25,9 +25,9 @@ public abstract class Tile : MonoBehaviour
         return isWalkable && curUnit == null; 
     }
 
-    public bool AttackAble()
+    public bool AttackAble(BaseUnit targetUnit)
     {
-        return isWalkable && UnitManager.instance.SelectedUnit != null && curUnit != null && curUnit != UnitManager.instance.SelectedUnit && curUnit.unitSide != UnitManager.instance.SelectedUnit.unitSide;
+        return isWalkable && targetUnit != null && curUnit != null && curUnit != targetUnit && curUnit.unitSide != targetUnit.unitSide;
     }
 
     public virtual void Init(int x, int y, bool haveEffect = false) 
@@ -101,6 +101,7 @@ public abstract class Tile : MonoBehaviour
                         UnitManager.instance.SelectedUnit.DealDamage(curUnit, UnitManager.instance.SelectedUnit.AttackPower, UnitManager.instance.SelectedUnit.AttackEffect);
                         //disable attack range
                         GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
+                        UnitManager.instance.SelectedUnit.Move();
                     }
                     else 
                     {
@@ -115,7 +116,6 @@ public abstract class Tile : MonoBehaviour
         {
             GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.moveRange, UnitManager.instance.SelectedUnit.moveType, false);
             SetUnit(UnitManager.instance.SelectedUnit);
-            UnitManager.instance.SelectedUnit.Move();
             GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, true);
         }
 

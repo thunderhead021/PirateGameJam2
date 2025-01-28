@@ -264,7 +264,7 @@ public class GridManager : MonoBehaviour
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
                         if (neighborTile != null)
                         {
-                            if (neighborTile.AttackAble() && !blockXs.Contains(x))
+                            if (neighborTile.AttackAble(tile.curUnit) && !blockXs.Contains(x))
                             {
                                 haveAttack = true;
                                 neighborTile.SetSelectable(isSelecting, true);
@@ -285,7 +285,7 @@ public class GridManager : MonoBehaviour
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
                             if (neighborTile != null)
                             {
-                                if (neighborTile.AttackAble() && !blockXs.Contains(x))
+                                if (neighborTile.AttackAble(tile.curUnit) && !blockXs.Contains(x))
                                 {
                                     haveAttack = true;
                                     neighborTile.SetSelectable(isSelecting, true);
@@ -311,6 +311,7 @@ public class GridManager : MonoBehaviour
     {
         List<Tile> result = new();
         List<int> blockXs = new();
+        string unitTag = tile.curUnit.unitSide == Side.Player ? "Player" : "Enemy";
         switch (moveType)
         {
             case AttackType.Square:
@@ -321,7 +322,7 @@ public class GridManager : MonoBehaviour
                         Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
                         if (neighborTile != null)
                         {
-                            if (neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy") && !blockXs.Contains(x) )
+                            if (neighborTile.AttackAble(tile.curUnit) && !neighborTile.curUnit.CompareTag(unitTag) && !blockXs.Contains(x) )
                             {
                                 result.Add(neighborTile);
                             }
@@ -342,7 +343,7 @@ public class GridManager : MonoBehaviour
                             Tile neighborTile = GetTileAtPos(new Vector2(tile.pos.x + x, tile.pos.y + y));
                             if (neighborTile != null)
                             {
-                                if (neighborTile.AttackAble() && !neighborTile.curUnit.CompareTag("Enemy") && !blockXs.Contains(x))
+                                if (neighborTile.AttackAble(tile.curUnit) && !neighborTile.curUnit.CompareTag(unitTag) && !blockXs.Contains(x))
                                 {
                                     result.Add(neighborTile);
                                 }

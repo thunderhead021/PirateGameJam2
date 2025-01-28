@@ -161,6 +161,8 @@ public class UnitManager : MonoBehaviour
                 if (checkUnit == unit)
                 {
                     enemyUnits.Remove(checkUnit);
+                    playerUnits.Add(checkUnit);
+                    checkUnit.ResetUnit();
                     break;
                 }
             }
