@@ -180,9 +180,11 @@ public class UnitManager : MonoBehaviour
                 break;
             case LevelState.Lose:
                 UIManager.instance.GameOver();
+                GameManager.instance.ChangeState(GameState.GameEnd);
                 break;
             case LevelState.Win:
-                GameManager.instance.NextLevel();
+                //GameManager.instance.NextLevel();
+                GameManager.instance.ChangeState(GameState.GameEnd);
                 break;
         }
         

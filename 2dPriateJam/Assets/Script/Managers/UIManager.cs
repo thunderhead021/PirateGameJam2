@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     public RectTransform playerTurn;
     public RectTransform enemyTurn;
     public GameObject gameOverScreen;
+    public GameObject nextLevelScreen;
+    public GameObject victoryScreen;
     public InfoDisplay infoDisplay;
     private BaseUnit SelectedUnit;
 
@@ -45,9 +47,22 @@ public class UIManager : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
     }
+
+    public void NextLevel() 
+    {
+        nextLevelScreen.SetActive(true);
+    }
+
+    public void Victory()
+    {
+        victoryScreen.SetActive(true);
+    }
+
     public void NewGame() 
     {
         gameOverScreen.SetActive(false);
+        nextLevelScreen.SetActive(false);
+        victoryScreen.SetActive(false);
     }
 
     public void SwitchTurn() 
