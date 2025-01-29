@@ -141,6 +141,7 @@ public class UnitManager : MonoBehaviour
     public void RemoveUnit(BaseUnit unit) 
     {
         LevelState levelState = LevelState.Playing;
+        bool changeSide = false;
         if (unit.unitSide == Side.Player) 
         {
             foreach (BaseUnit checkUnit in playerUnits) 
@@ -162,6 +163,7 @@ public class UnitManager : MonoBehaviour
                 {
                     enemyUnits.Remove(checkUnit);
                     playerUnits.Add(checkUnit);
+                    changeSide = true;
                     checkUnit.ResetUnit();
                     break;
                 }
@@ -173,7 +175,8 @@ public class UnitManager : MonoBehaviour
         switch (levelState) 
         {
             case LevelState.Playing:
-                Destroy(unit.gameObject);
+                if(!changeSide)
+                    Destroy(unit.gameObject);
                 break;
             case LevelState.Lose:
                 UIManager.instance.GameOver();
