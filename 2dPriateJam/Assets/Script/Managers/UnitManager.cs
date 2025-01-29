@@ -163,6 +163,7 @@ public class UnitManager : MonoBehaviour
                 {
                     enemyUnits.Remove(checkUnit);
                     playerUnits.Add(checkUnit);
+                    checkUnit.unitSide = Side.Player;
                     changeSide = true;
                     checkUnit.ResetUnit();
                     break;
@@ -183,7 +184,7 @@ public class UnitManager : MonoBehaviour
                 GameManager.instance.ChangeState(GameState.GameEnd);
                 break;
             case LevelState.Win:
-                //GameManager.instance.NextLevel();
+                UIManager.instance.NextLevel();
                 GameManager.instance.ChangeState(GameState.GameEnd);
                 break;
         }
