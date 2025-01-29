@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
       propertyPath: sideWall
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2044373780094601892, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
       propertyPath: m_Name

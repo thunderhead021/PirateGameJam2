@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+      propertyPath: sideWall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+      propertyPath: sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 48ac53919c0a6d44fb0cd227ef3e5a98, type: 3}
+    - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: dab6763b2d5efcf4382b2d28df62d6cd, type: 3}
+    - target: {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cf996896072c91448cf3e78b388b1e1, type: 3}
     - target: {fileID: 2044373780094601892, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
       propertyPath: m_Name
       value: Wall 2
@@ -68,8 +88,7 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.0666667
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -2341245853158949151, guid: 672d90c38c23c3949bfc5da1f1e9e70b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
