@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: Tree Bottom
   m_EditorClassIdentifier: 
   TileSprite:
-  - {fileID: 21300000, guid: 267deb3aad546194d9b8ea5b349fe16e, type: 3}
+  - {fileID: 21300000, guid: 8632af562e2ffb1448f28353c1bff723, type: 3}
+  - {fileID: 21300000, guid: e8f0e455c4545494eaf1a5e4dfcf013c, type: 3}
+  - {fileID: 21300000, guid: e3d21efe53ab77a4784f7a830e74df9e, type: 3}
+  - {fileID: 21300000, guid: f60503179b2e662419fc8430525d0c33, type: 3}
+  - {fileID: 21300000, guid: 4c32c0b246ff0b445b6ef31cd55e285c, type: 3}
+  - {fileID: 21300000, guid: e6c434598256def4a888d37b39057fef, type: 3}
+  - {fileID: 21300000, guid: 8c157d3675d2ca443bc02c2b32c7bad3, type: 3}
+  - {fileID: 21300000, guid: 792d9cc556a9b684baaee731dc1ce4b6, type: 3}
   isForMovingTile: 0
   IsTopLeftSameTag: 0
   IsTopCenterSameTag: 1

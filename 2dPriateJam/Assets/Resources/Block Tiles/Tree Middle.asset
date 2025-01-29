@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: Tree Middle
   m_EditorClassIdentifier: 
   TileSprite:
-  - {fileID: 21300000, guid: 6c4f0653ff2db764594c4a81f3c220b4, type: 3}
-  - {fileID: 21300000, guid: 9691d50ca13128d47bed0bed33bdb0fc, type: 3}
+  - {fileID: 21300000, guid: b53eda5a7ec0ec048ac0b9831c594741, type: 3}
+  - {fileID: 21300000, guid: 05d388fbfa26f5c43bbbb8f33ceef61a, type: 3}
+  - {fileID: 21300000, guid: 490d7fe3aa449f8469d42ace4d12c8e6, type: 3}
+  - {fileID: 21300000, guid: 4aa9354737efe124d9ee397afa2b50aa, type: 3}
+  - {fileID: 21300000, guid: 371605094a70e464784d7a4ef6d97e2f, type: 3}
+  - {fileID: 21300000, guid: 43a24e8bd39162b49859e1fa34dcd11c, type: 3}
+  - {fileID: 21300000, guid: dae851b316325e54e9343df8896b1803, type: 3}
+  - {fileID: 21300000, guid: c7ffe46f8e160c44da6c7ba1429dd92e, type: 3}
+  - {fileID: 21300000, guid: 863cceb26c617b34c95d578c98dac003, type: 3}
+  - {fileID: 21300000, guid: 91230d99d3dffee4b9e0e5176598d63a, type: 3}
+  - {fileID: 21300000, guid: 092e082d778e8a1478633585ae54b2a8, type: 3}
+  - {fileID: 21300000, guid: eb69e0b1e69b19d4ab59f091fde506cb, type: 3}
+  - {fileID: 21300000, guid: 4c71d0e52b0fc024fb64e4242cd3ca77, type: 3}
+  - {fileID: 21300000, guid: d13fbbfe47bb05e468987ad903afa94b, type: 3}
   isForMovingTile: 0
   IsTopLeftSameTag: 0
   IsTopCenterSameTag: 1
