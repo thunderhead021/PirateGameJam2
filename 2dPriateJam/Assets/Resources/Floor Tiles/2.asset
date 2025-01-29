@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c804cd5e3b32418958e35b7a27794, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  TileSprite: {fileID: 21300000, guid: 89e045b29855baa438c8c56f1a68a292, type: 3}
+  TileSprite:
+  - {fileID: 21300000, guid: 89e045b29855baa438c8c56f1a68a292, type: 3}
   isForMovingTile: 1
   IsTopLeftSameTag: 0
   IsTopCenterSameTag: 0
