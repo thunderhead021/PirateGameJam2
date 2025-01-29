@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 
     public RectTransform playerTurn;
     public RectTransform enemyTurn;
+    public GameObject mainMenuScreen;
+    public GameObject gameScreen;
     public GameObject gameOverScreen;
     public GameObject nextLevelScreen;
     public GameObject victoryScreen;
@@ -23,8 +25,11 @@ public class UIManager : MonoBehaviour
     public void DisplayInfo(BaseUnit unit, bool active) 
     {
         infoDisplay.gameObject.SetActive(active);
-        if(active)
+        if (active)
+        {
+            unit.ClickOnSoundPlay();
             infoDisplay.Setup(unit.TurnIcon, unit.AttackPower);
+        }
     }
 
     public void SetSelectUnit(BaseUnit unit = null)
@@ -33,7 +38,7 @@ public class UIManager : MonoBehaviour
         {
             SelectedUnit.Select(false);
             GridManager.instance.SetTilesMoveable(SelectedUnit.curTile, SelectedUnit.moveRange, SelectedUnit.moveType, false, true);
-            DisplayInfo(SelectedUnit, false);
+            DisplayInfo(SelectedUnit, false);       
         }
         SelectedUnit = unit;
         if (unit != null)

@@ -154,6 +154,9 @@ public class UnitManager : MonoBehaviour
             }
             if(playerUnits.Count == 0)
                 levelState = LevelState.Lose;
+
+            if (playerUnits.Count <= 1)
+                SoundManager.instance.PlayCritBGM();
         }
         else 
         {
@@ -165,7 +168,7 @@ public class UnitManager : MonoBehaviour
                     playerUnits.Add(checkUnit);
                     checkUnit.unitSide = Side.Player;
                     changeSide = true;
-                    checkUnit.ResetUnit();
+                    checkUnit.ReviveUnit();
                     break;
                 }
             }
@@ -176,8 +179,10 @@ public class UnitManager : MonoBehaviour
         switch (levelState) 
         {
             case LevelState.Playing:
-                if(!changeSide)
-                    Destroy(unit.gameObject);
+                if (!changeSide)
+                {
+                    unit.RemoveGameObject();
+                }
                 break;
             case LevelState.Lose:
                 UIManager.instance.GameOver();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   percentageOfBlockingTileOutOf100: 40
-  maxNumberOfSpecialTiles: 7
+  maxNumberOfSpecialTiles: 8
   numberOfEnemies: 5
   numberOfPlayerUnits: 1
   playerUnitsPool:
@@ -29,4 +29,3 @@ MonoBehaviour:
   - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
   - {fileID: 2300418288628502375, guid: 4a35f7ef1b57b834998d632b64b7964f, type: 3}
   - {fileID: 2300418288628502375, guid: 4a35f7ef1b57b834998d632b64b7964f, type: 3}
-  - {fileID: -5374919591636645189, guid: 854110222560c724aa3c5bd27b05cf26, type: 3}

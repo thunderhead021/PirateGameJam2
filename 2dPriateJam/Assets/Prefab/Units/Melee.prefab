@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 712136044522213433, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: Hp
       value: 2
@@ -34,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: AttackPower
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: attackRange
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: AttackEffect
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: EnemySideSprite
@@ -50,12 +54,32 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 22e00f02ea0a46045b174a27d2758835, type: 3}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: attackBehaviour
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: PlayerSideSprite
       value: 
       objectReference: {fileID: 21300000, guid: 22e00f02ea0a46045b174a27d2758835, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 911f6115e2bdc384695d4bb87d7dba91, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f06d6aa076d2d5d429d48102be1477a1, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 367b8dca79494a943b1d9ed42e6f6d46, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: attackSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 137a369ce721ffe4ba1eee0ab6fe2dc7, type: 3}
     - target: {fileID: 1944237986996834122, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

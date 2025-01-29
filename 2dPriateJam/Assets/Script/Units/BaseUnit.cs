@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class BaseUnit : MonoBehaviour
 {
@@ -25,7 +27,12 @@ public class BaseUnit : MonoBehaviour
     public bool hasMoved { get; private set; } = false;
     private int MaxHp;
     private int posionedTurn = 0;
-
+    public AudioSource audioSource;
+    public List<AudioClip> attackSounds;
+    public List<AudioClip> reciveDamageSounds;
+    public List<AudioClip> clickOnSounds;
+    public List<AudioClip> deathSounds;
+    public List<AudioClip> reviveSounds;
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
@@ -33,25 +40,86 @@ public class BaseUnit : MonoBehaviour
     [SerializeField]
     private Material selectMaterial;
 
+    private void DeathSoundPlay()
+    {
+        audioSource.clip = deathSounds[Random.Range(0, deathSounds.Count)];
+        audioSource.Play();
+    }
+
+    private void ReviveSoundPlay()
+    {
+        audioSource.clip = reviveSounds[Random.Range(0, reviveSounds.Count)];
+        audioSource.Play();
+    }
+
+    public void ClickOnSoundPlay() 
+    {
+        audioSource.clip = clickOnSounds[Random.Range(0, clickOnSounds.Count)];
+        audioSource.Play();
+    }
+
+    public void AttackSoundPlay()
+    {
+        audioSource.clip = attackSounds[Random.Range(0, attackSounds.Count)];
+        audioSource.Play();
+    }
+
+    public void ReciveDamageSoundPlay()
+    {
+        audioSource.clip = reciveDamageSounds[Random.Range(0, reciveDamageSounds.Count)];
+        audioSource.Play();
+    }
+
     private void Start()
     {
         MaxHp = Hp;
         SetSprite();
     }
-    
+
+    public void PlaySound(AudioClip clip) 
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
     public void SetSprite() 
     {
         spriteRenderer.sprite = unitSide == Side.Player ? PlayerSideSprite : EnemySideSprite;
         TurnIcon = unitSide == Side.Player ? PlayerSideSprite : EnemySideSprite;
     }
 
-    public void ResetUnit() 
+    public void RemoveGameObject() 
+    {
+        StartCoroutine(RemoveGameObjectHelper());
+    }
+
+    IEnumerator RemoveGameObjectHelper() 
+    {
+        DeathSoundPlay();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
+    public void ReviveUnit() 
+    {
+        StartCoroutine(ReviveUnitHelper());    
+    }
+
+    IEnumerator ReviveUnitHelper()
     {
         Hp = MaxHp;
         hasMoved = false;
         posionedTurn = 0;
         curStatus.Clear();
         Select(false);
+        ReviveSoundPlay();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
         UpdateHp();
         SetSprite();
     }
@@ -63,8 +131,13 @@ public class BaseUnit : MonoBehaviour
 
     public void EnemyMove() 
     {
+        StartCoroutine(EnemyMoveHelper());
+    }
+
+    IEnumerator EnemyMoveHelper() 
+    {
         List<Tile> allMoveable = GridManager.instance.GetAllMoveableTiles(curTile, moveRange, moveType);
-        switch (enemyBehaviour) 
+        switch (enemyBehaviour)
         {
             case EnemyBehaviour.Chaser:
                 ChaserMove(allMoveable);
@@ -81,9 +154,9 @@ public class BaseUnit : MonoBehaviour
         }
         //enemy attack here
         List<Tile> allAttackable = GridManager.instance.GetAllAttackableTiles(curTile, attackRange, attackType);
-        if (allAttackable.Count > 0) 
+        if (allAttackable.Count > 0)
         {
-            switch (attackBehaviour) 
+            switch (attackBehaviour)
             {
                 case AttackBehaviour.Focus:
                     FocusAttack(allAttackable);
@@ -96,19 +169,38 @@ public class BaseUnit : MonoBehaviour
                     break;
             }
         }
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
     }
 
     public void DealDamage(BaseUnit target, int amount, AttackEffect attackEffect) 
     {
+        StartCoroutine(DealDamageHelper(target, amount, attackEffect));
+    }
+
+    IEnumerator DealDamageHelper(BaseUnit target, int amount, AttackEffect attackEffect) 
+    {
+        AttackSoundPlay();
         target.Hp -= amount;
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
         if (target.Hp <= 0)
         {
             target.Death();
         }
-        else 
+        else
         {
             target.UpdateHp();
             target.ApplyStatus(attackEffect);
+            target.ReciveDamageSoundPlay();
+            while (target.audioSource.isPlaying)
+            {
+                yield return null;
+            }
         }
     }
 

@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update 
     void Start()
     {
-        ChangeState(GameState.GenerateGrid);
+        ChangeState(GameState.GameStart);
     }
 
     public void EndPlayerTurn() 
@@ -48,16 +48,34 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.EnemyTurn);
     }
 
+    public void StartGame() 
+    {
+        ChangeState(GameState.GenerateGrid);
+    }
+
+    IEnumerator GenerateGridPhase()
+    {
+        GridManager.instance.ResetLevel();
+        UnitManager.instance.ResetLevel();
+        UIManager.instance.NewGame();
+        GridManager.instance.GenerateGrid(levels[curLevel].percentageOfBlockingTileOutOf100, levels[curLevel].maxNumberOfSpecialTiles);
+        SoundManager.instance.PlayBattleBGM();
+        yield return new WaitForSeconds(0.5f);
+        UIManager.instance.mainMenuScreen.SetActive(false);
+        UIManager.instance.gameScreen.SetActive(true);
+    }
+
     public void ChangeState(GameState state) 
     {
         GameState = state;
         switch (state) 
         {
+            case GameState.GameStart:
+                UIManager.instance.mainMenuScreen.SetActive(true);
+                UIManager.instance.gameScreen.SetActive(false);
+                break;
             case GameState.GenerateGrid:
-                GridManager.instance.ResetLevel();
-                UnitManager.instance.ResetLevel();
-                UIManager.instance.NewGame();
-                GridManager.instance.GenerateGrid(levels[curLevel].percentageOfBlockingTileOutOf100, levels[curLevel].maxNumberOfSpecialTiles);
+                StartCoroutine(GenerateGridPhase());
                 break;
             case GameState.SpawnPlayerUnit:
                 UnitManager.instance.SpawnPlayerUnits(levels[curLevel].numberOfPlayerUnits, levels[curLevel].playerUnitsPool);
@@ -86,6 +104,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState 
 {
+    GameStart,
     GenerateGrid,
     SpawnPlayerUnit,
     SpawnEnemyUnits,

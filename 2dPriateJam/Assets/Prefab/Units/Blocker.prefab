@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 712136044522213433, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1944237986996834122, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -74,6 +78,11 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
   m_PrefabInstance: {fileID: 5274680056649317543}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4670635669521231006 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 712136044522213433, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+  m_PrefabInstance: {fileID: 5274680056649317543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7990521099151400055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2870874381318725840, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
@@ -107,6 +116,13 @@ MonoBehaviour:
   enemyBehaviour: 2
   attackBehaviour: 0
   curHp: {fileID: 9095368561271147222}
+  audioSource: {fileID: 4670635669521231006}
+  attackSounds: []
+  reciveDamageSounds:
+  - {fileID: 8300000, guid: 137a369ce721ffe4ba1eee0ab6fe2dc7, type: 3}
+  clickOnSounds: []
+  deathSounds: []
+  reviveSounds: []
   spriteRenderer: {fileID: 4077153346646935982}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}
