@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c804cd5e3b32418958e35b7a27794, type: 3}
   m_Name: House Roof Right
   m_EditorClassIdentifier: 
-  TileSprite: []
+  TileSprite:
+  - {fileID: 21300000, guid: a21b8b7367a6eb248971d62c7ae69e28, type: 3}
+  - {fileID: 21300000, guid: d9297df0616afe04b8c84f1eadbd0a2b, type: 3}
+  - {fileID: 21300000, guid: 52d4c9337c9c1434ebfb18cdff86a341, type: 3}
+  - {fileID: 21300000, guid: 189fa47e5797c624d97dbcf528c6291e, type: 3}
+  - {fileID: 21300000, guid: 13574bb4886276347919c119fb29deef, type: 3}
   isForMovingTile: 0
-  IsTopLeftSameTag: 0
-  IsTopCenterSameTag: 0
+  IsTopLeftSameTag: 2
+  IsTopCenterSameTag: 2
   IsTopRightSameTag: 0
-  IsMiddleLeftSameTag: 0
+  IsMiddleLeftSameTag: 1
   IsMiddleRightSameTag: 0
-  IsBottomLeftSameTag: 0
-  IsBottomCenterSameTag: 0
+  IsBottomLeftSameTag: 1
+  IsBottomCenterSameTag: 1
   IsBottomRightSameTag: 0

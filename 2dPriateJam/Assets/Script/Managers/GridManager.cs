@@ -395,6 +395,8 @@ public class GridManager : MonoBehaviour
                 return false;
             else if( tileRules[i] == TileRuleState.Diffrent && neighborTile != null && neighborTile.isWalkable == tile.isWalkable )
                 return false;
+            else if( neighborTile == null && tileRules[i] == TileRuleState.Same)
+                return false;
         }
         return true;
     }

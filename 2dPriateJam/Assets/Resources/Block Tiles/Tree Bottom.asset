@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c804cd5e3b32418958e35b7a27794, type: 3}
   m_Name: Tree Bottom
   m_EditorClassIdentifier: 
-  TileSprite: []
+  TileSprite:
+  - {fileID: 21300000, guid: 267deb3aad546194d9b8ea5b349fe16e, type: 3}
   isForMovingTile: 0
   IsTopLeftSameTag: 0
-  IsTopCenterSameTag: 0
+  IsTopCenterSameTag: 1
   IsTopRightSameTag: 0
   IsMiddleLeftSameTag: 0
   IsMiddleRightSameTag: 0
   IsBottomLeftSameTag: 0
-  IsBottomCenterSameTag: 0
+  IsBottomCenterSameTag: 2
   IsBottomRightSameTag: 0

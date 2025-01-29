@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c804cd5e3b32418958e35b7a27794, type: 3}
   m_Name: House Bottom Right
   m_EditorClassIdentifier: 
-  TileSprite: []
+  TileSprite:
+  - {fileID: 21300000, guid: 8632af562e2ffb1448f28353c1bff723, type: 3}
+  - {fileID: 21300000, guid: e8f0e455c4545494eaf1a5e4dfcf013c, type: 3}
+  - {fileID: 21300000, guid: e3d21efe53ab77a4784f7a830e74df9e, type: 3}
+  - {fileID: 21300000, guid: f60503179b2e662419fc8430525d0c33, type: 3}
+  - {fileID: 21300000, guid: 4c32c0b246ff0b445b6ef31cd55e285c, type: 3}
+  - {fileID: 21300000, guid: e6c434598256def4a888d37b39057fef, type: 3}
+  - {fileID: 21300000, guid: 8c157d3675d2ca443bc02c2b32c7bad3, type: 3}
+  - {fileID: 21300000, guid: 792d9cc556a9b684baaee731dc1ce4b6, type: 3}
   isForMovingTile: 0
-  IsTopLeftSameTag: 0
-  IsTopCenterSameTag: 0
+  IsTopLeftSameTag: 1
+  IsTopCenterSameTag: 1
   IsTopRightSameTag: 0
-  IsMiddleLeftSameTag: 0
+  IsMiddleLeftSameTag: 1
   IsMiddleRightSameTag: 0
-  IsBottomLeftSameTag: 0
-  IsBottomCenterSameTag: 0
+  IsBottomLeftSameTag: 2
+  IsBottomCenterSameTag: 2
   IsBottomRightSameTag: 0
