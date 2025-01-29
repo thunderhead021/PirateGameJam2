@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
     public void NextLevel() 
     {
         curLevel++;
-        ChangeState(GameState.GenerateGrid);
+        if(curLevel >= levels.Count)
+            UIManager.instance.Victory();
+        else
+            ChangeState(GameState.GenerateGrid);
     }
 
     public void NewGame() 
@@ -73,6 +76,8 @@ public class GameManager : MonoBehaviour
                 UnitManager.instance.ApplyStatus(true);
                 UnitManager.instance.EnemyTurn();
                 break;
+            case GameState.GameEnd:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
@@ -86,4 +91,5 @@ public enum GameState
     SpawnEnemyUnits,
     PlayerTurn,
     EnemyTurn,
+    GameEnd,
 }
