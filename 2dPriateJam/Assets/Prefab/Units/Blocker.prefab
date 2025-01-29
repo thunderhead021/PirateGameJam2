@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curTile: {fileID: 0}
   TurnIcon: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
+  PlayerSideSprite: {fileID: 21300000, guid: 7d9e037c2453d6546a36ba84730598ba, type: 3}
+  EnemySideSprite: {fileID: 21300000, guid: 1e41c0717a85ef14c82fdeabdf0b1545, type: 3}
   unitSide: 0
   Hp: 5
   AttackPower: 0

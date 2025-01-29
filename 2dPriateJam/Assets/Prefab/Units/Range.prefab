@@ -33,9 +33,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: EnemySideSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96a7940774d1798438d14286f9b8312d, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: attackBehaviour
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: PlayerSideSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 60f2fe3637c2b6c4bbf3c08b5e94b716, type: 3}
     - target: {fileID: 1944237986996834122, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
