@@ -106,7 +106,7 @@ MonoBehaviour:
   moveRange: 3
   attackRange: 3
   moveType: 0
-  attackType: 1
+  attackType: 0
   AttackEffect: 0
   speed: 999
   enemyBehaviour: 0

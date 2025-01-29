@@ -53,6 +53,10 @@ PrefabInstance:
       value: Blocker
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96a7940774d1798438d14286f9b8312d, type: 3}
+    - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

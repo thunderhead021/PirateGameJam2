@@ -81,6 +81,10 @@ PrefabInstance:
       value: Range
       objectReference: {fileID: 0}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 20e94e9cde6da4547ba9845ab19aadc0, type: 3}
+    - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
