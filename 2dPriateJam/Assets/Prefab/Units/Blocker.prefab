@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 96a7940774d1798438d14286f9b8312d, type: 3}
+      objectReference: {fileID: 21300000, guid: 0f214f3bf096a8b4bb03249bf629ec2d, type: 3}
     - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curTile: {fileID: 0}
   TurnIcon: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
-  PlayerSideSprite: {fileID: 21300000, guid: 7d9e037c2453d6546a36ba84730598ba, type: 3}
+  PlayerSideSprite: {fileID: 21300000, guid: 0f214f3bf096a8b4bb03249bf629ec2d, type: 3}
   EnemySideSprite: {fileID: 21300000, guid: 1e41c0717a85ef14c82fdeabdf0b1545, type: 3}
   unitSide: 0
   Hp: 5
