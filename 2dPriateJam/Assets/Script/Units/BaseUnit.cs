@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseUnit : MonoBehaviour
 {
     public Tile curTile;
+    [HideInInspector]
     public Sprite TurnIcon;
     public Sprite PlayerSideSprite;
     public Sprite EnemySideSprite;
