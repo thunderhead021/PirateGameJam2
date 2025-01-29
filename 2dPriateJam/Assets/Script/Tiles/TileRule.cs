@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New TileRule", menuName = "Tile rule")]
 public class TileRule : ScriptableObject
 {
-  public Sprite TileSprite;
+  public List<Sprite> TileSprite;
   public bool isForMovingTile = false;
 
   public TileRuleState IsTopLeftSameTag;
@@ -14,6 +15,11 @@ public class TileRule : ScriptableObject
   public TileRuleState IsBottomLeftSameTag;
   public TileRuleState IsBottomCenterSameTag;
   public TileRuleState IsBottomRightSameTag;
+
+  public Sprite GetSprite()
+  {
+    return TileSprite[Random.Range(0, TileSprite.Count)];
+  }
 }
 
 public enum TileRuleState 

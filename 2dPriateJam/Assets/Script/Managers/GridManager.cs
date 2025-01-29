@@ -405,7 +405,7 @@ public class GridManager : MonoBehaviour
         {
             int rand = Random.Range(0, 100);
             int index = rand <= 50 ? 0 : rand <= 75 ? 1 : rand <= 95 ? 2 : 3;
-            tile.UpdateTile(normalTileRules[index].TileSprite);
+            tile.UpdateTile(normalTileRules[index].GetSprite());
         }
         else 
         {
@@ -415,7 +415,7 @@ public class GridManager : MonoBehaviour
                 {
                     if (RuleMatch(tile, rule))
                     {
-                        tile.UpdateTile(rule.TileSprite);
+                        tile.UpdateTile(rule.GetSprite());
                         break;
                     }
                 }
