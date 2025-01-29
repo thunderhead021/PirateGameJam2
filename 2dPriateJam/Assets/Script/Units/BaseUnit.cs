@@ -6,6 +6,8 @@ public class BaseUnit : MonoBehaviour
 {
     public Tile curTile;
     public Sprite TurnIcon;
+    public Sprite PlayerSideSprite;
+    public Sprite EnemySideSprite;
     public Side unitSide = Side.None;
     public int Hp = 10;
     public int AttackPower = 2;
@@ -33,6 +35,13 @@ public class BaseUnit : MonoBehaviour
     private void Start()
     {
         MaxHp = Hp;
+        SetSprite();
+    }
+    
+    public void SetSprite() 
+    {
+        spriteRenderer.sprite = unitSide == Side.Player ? PlayerSideSprite : EnemySideSprite;
+        TurnIcon = unitSide == Side.Player ? PlayerSideSprite : EnemySideSprite;
     }
 
     public void ResetUnit() 
@@ -43,6 +52,7 @@ public class BaseUnit : MonoBehaviour
         curStatus.Clear();
         Select(false);
         UpdateHp();
+        SetSprite();
     }
 
     public void Select(bool isSelect) 
