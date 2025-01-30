@@ -102,6 +102,7 @@ public abstract class Tile : MonoBehaviour
                         //disable attack range
                         GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                         UnitManager.instance.SelectedUnit.Move();
+                        UnitManager.instance.SetSelectUnit();
                     }
                     else 
                     {
