@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,18 +75,22 @@ public abstract class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(GameManager.instance.GameState != GameState.PlayerTurn)
+        if (GameManager.instance.GameState != GameState.PlayerTurn)
             return;
+        StartCoroutine(OnMouseDownHelper());
+    }
 
+    IEnumerator OnMouseDownHelper() 
+    {
         if (curUnit != null)
         {
             //show info
 
-            if (!curUnit.hasMoved || curUnit != UnitManager.instance.SelectedUnit) 
+            if (!curUnit.hasMoved || curUnit != UnitManager.instance.SelectedUnit)
             {
                 if (curUnit.unitSide == Side.Player)
                 {
-                    if (!curUnit.hasMoved) 
+                    if (!curUnit.hasMoved)
                     {
                         UIManager.instance.SetSelectUnit();
                         UnitManager.instance.SetSelectUnit(curUnit);
@@ -93,7 +98,7 @@ public abstract class Tile : MonoBehaviour
                         GridManager.instance.SetTilesMoveable(this, curUnit.moveRange, curUnit.moveType, true);
                     }
                 }
-                else if (curUnit.unitSide == Side.Enemy )
+                else if (curUnit.unitSide == Side.Enemy)
                 {
                     if (isSelected)
                     {
@@ -104,16 +109,21 @@ public abstract class Tile : MonoBehaviour
                         UnitManager.instance.SelectedUnit.Move();
                         UnitManager.instance.SetSelectUnit();
                     }
-                    else 
+                    else
                     {
-                        UnitManager.instance.SetSelectUnit();
-                        UIManager.instance.SetSelectUnit(curUnit);
                         GridManager.instance.SetTilesMoveable(this, curUnit.moveRange, curUnit.moveType, true, true);
+                        curUnit.MoveSoundPlay();
+                        UIManager.instance.SetSelectUnit(curUnit);
+                        while (curUnit.audioSource.isPlaying)
+                        {
+                            yield return null;
+                        }
+                        UnitManager.instance.SetSelectUnit();                  
                     }
                 }
             }
         }
-        else if (UnitManager.instance.SelectedUnit != null && isSelected) 
+        else if (UnitManager.instance.SelectedUnit != null && isSelected)
         {
             GridManager.instance.SetTilesMoveable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.moveRange, UnitManager.instance.SelectedUnit.moveType, false);
             SetUnit(UnitManager.instance.SelectedUnit);

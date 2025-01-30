@@ -41,7 +41,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField]
     private Material selectMaterial;
 
-    private void MoveSoundPlay()
+    public void MoveSoundPlay()
     {
         audioSource.clip = moveSounds[Random.Range(0, moveSounds.Count)];
         audioSource.Play();

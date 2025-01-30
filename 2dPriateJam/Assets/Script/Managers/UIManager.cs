@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +15,35 @@ public class UIManager : MonoBehaviour
     public GameObject victoryScreen;
     public InfoDisplay infoDisplay;
     private BaseUnit SelectedUnit;
+
+    public Image Intro;
+    public List<Sprite> intros;
+    public List<AudioSource> buttonAudioSources;
+
+    private int introIndex = 0;
+
+    public void PlayIntro() 
+    {
+        Intro.sprite = intros[introIndex];
+        introIndex++;
+        if (introIndex >= intros.Count)
+        {
+            introIndex = 0;
+            GameManager.instance.ChangeState(GameState.GenerateGrid);
+        }
+    }
+
+    public bool IsButtonStillPlaySound() 
+    {
+        foreach (AudioSource source in buttonAudioSources) 
+        {
+            if(source.isPlaying)    
+            { 
+                return true; 
+            }
+        }
+        return false;
+    }
 
     private void Awake()
     {

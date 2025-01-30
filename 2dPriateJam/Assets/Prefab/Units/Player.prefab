@@ -227,6 +227,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50aaf4cad2be3d342ad653d96e939dce, type: 3}
   - {fileID: 8300000, guid: defd88e7858ac1b4382a4a822ccfd5b1, type: 3}
   - {fileID: 8300000, guid: a3e6646be2c61364487dd9b3cfc8c982, type: 3}
+  moveSounds:
+  - {fileID: 8300000, guid: 8e50766dd500a5d49aea5630dbe88340, type: 3}
+  - {fileID: 8300000, guid: fc3c4ad296497bf4e8c22d5f36eddc39, type: 3}
+  - {fileID: 8300000, guid: 6b9d3050a79c5694fb5b7b427a7a9a00, type: 3}
+  - {fileID: 8300000, guid: f54d13d41b8ee2343b7d968bba284b3b, type: 3}
+  - {fileID: 8300000, guid: d74c90faff685734497b7d3b50526720, type: 3}
+  - {fileID: 8300000, guid: be9fdaed0a33042479aa18555135dfac, type: 3}
+  - {fileID: 8300000, guid: 9f8618d47cb6fe14aa4f0a9e061e2548, type: 3}
   spriteRenderer: {fileID: 8189682455004116233}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}
