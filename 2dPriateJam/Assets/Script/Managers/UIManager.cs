@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         {
             Intro.sprite = intros[introIndex];
             introIndex++;
-            if (introIndex >= intros.Count)
+            if (introIndex > intros.Count)
             {
                 introIndex = 0;
                 GameManager.instance.ChangeState(GameState.GenerateGrid);
