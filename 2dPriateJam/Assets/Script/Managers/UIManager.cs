@@ -26,13 +26,13 @@ public class UIManager : MonoBehaviour
     {
         if (intros.Count > 0)
         {
-            Intro.sprite = intros[introIndex];
-            introIndex++;
             if (introIndex > intros.Count)
             {
                 introIndex = 0;
                 GameManager.instance.ChangeState(GameState.GenerateGrid);
             }
+            Intro.sprite = intros[introIndex];
+            introIndex++; 
         }
         else 
         {
