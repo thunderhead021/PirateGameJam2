@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     {
         if (intros.Count > 0)
         {
-            if (introIndex > intros.Count)
+            if (introIndex >= intros.Count)
             {
                 introIndex = 0;
                 GameManager.instance.ChangeState(GameState.GenerateGrid);
