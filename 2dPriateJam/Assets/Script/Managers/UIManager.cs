@@ -24,11 +24,18 @@ public class UIManager : MonoBehaviour
 
     public void PlayIntro() 
     {
-        Intro.sprite = intros[introIndex];
-        introIndex++;
-        if (introIndex >= intros.Count)
+        if (intros.Count > 0)
         {
-            introIndex = 0;
+            Intro.sprite = intros[introIndex];
+            introIndex++;
+            if (introIndex >= intros.Count)
+            {
+                introIndex = 0;
+                GameManager.instance.ChangeState(GameState.GenerateGrid);
+            }
+        }
+        else 
+        {
             GameManager.instance.ChangeState(GameState.GenerateGrid);
         }
     }

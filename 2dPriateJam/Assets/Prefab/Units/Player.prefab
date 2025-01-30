@@ -237,6 +237,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f8618d47cb6fe14aa4f0a9e061e2548, type: 3}
   spriteRenderer: {fileID: 8189682455004116233}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  damageMaterial: {fileID: 2100000, guid: f809bea3a349bac499a7b11ee99f9193, type: 2}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}
 --- !u!82 &712136044522213433
 AudioSource:

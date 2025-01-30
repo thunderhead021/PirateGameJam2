@@ -60,10 +60,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 0f214f3bf096a8b4bb03249bf629ec2d, type: 3}
-    - target: {fileID: 8189682455004116233, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents:
     - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
     m_RemovedGameObjects: []
@@ -133,6 +129,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50aaf4cad2be3d342ad653d96e939dce, type: 3}
   - {fileID: 8300000, guid: defd88e7858ac1b4382a4a822ccfd5b1, type: 3}
   - {fileID: 8300000, guid: a3e6646be2c61364487dd9b3cfc8c982, type: 3}
+  moveSounds: []
   spriteRenderer: {fileID: 4077153346646935982}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}

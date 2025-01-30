@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
   enemyUnitsPool:
   - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 2413863805468176605, guid: 6e78d8efece12064da4304a37e9ba8c8, type: 3}

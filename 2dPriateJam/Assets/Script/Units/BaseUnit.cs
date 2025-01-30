@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
@@ -39,7 +40,26 @@ public class BaseUnit : MonoBehaviour
     [SerializeField]
     private Material defaultMaterial;
     [SerializeField]
+    private Material damageMaterial;
+    [SerializeField]
     private Material selectMaterial;
+
+    public void DamageEffect(bool isRevert = false) 
+    {
+        if (isRevert) 
+        {
+            spriteRenderer.material = defaultMaterial;
+            damageMaterial.SetFloat("_TintAmount", 0);
+        }
+        else 
+        {
+            spriteRenderer.material = damageMaterial;
+            float amount = Mathf.Lerp(1, 0, Time.deltaTime);
+            amount = Mathf.Clamp(amount, 0, 1);
+            Select(false);
+            damageMaterial.SetFloat("_TintAmount", amount);
+        }  
+    }
 
     public void MoveSoundPlay()
     {
@@ -211,8 +231,10 @@ public class BaseUnit : MonoBehaviour
             target.ReciveDamageSoundPlay();
             while (target.audioSource.isPlaying)
             {
+                target.DamageEffect();
                 yield return null;
             }
+            target.DamageEffect(true);
         }
     }
 

@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a3576a01bd4384389e321edf469942, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
-  percentageOfBlockingTileOutOf100: 40
+  percentageOfBlockingTileOutOf100: 50
   maxNumberOfSpecialTiles: 8
-  numberOfEnemies: 5
+  numberOfEnemies: 6
   numberOfPlayerUnits: 1
   playerUnitsPool:
   - {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
   enemyUnitsPool:
   - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
   - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
-  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
-  - {fileID: 5923906278234777354, guid: 7603a3fff7c66ed4896dd21edb905cb1, type: 3}
+  - {fileID: 2413863805468176605, guid: 6e78d8efece12064da4304a37e9ba8c8, type: 3}
+  - {fileID: 2413863805468176605, guid: 6e78d8efece12064da4304a37e9ba8c8, type: 3}
   - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
   - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
   - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
   - {fileID: 5202816291994166308, guid: 19feda100f7e706468b7ec924cabae6a, type: 3}
   - {fileID: 2300418288628502375, guid: 4a35f7ef1b57b834998d632b64b7964f, type: 3}
-  - {fileID: 2300418288628502375, guid: 4a35f7ef1b57b834998d632b64b7964f, type: 3}
+  - {fileID: 1549808064293891035, guid: 67e2cd8a7951343439aceb96bdee4298, type: 3}
