@@ -118,6 +118,7 @@ public class UnitManager : MonoBehaviour
         foreach (BaseUnit unit in enemyUnits)
         {
             unit.EnemyMove();
+            yield return new WaitForSeconds(0.5f);
         }
 
         while (!IsAllEnemyMoved())
