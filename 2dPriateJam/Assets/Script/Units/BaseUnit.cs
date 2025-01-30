@@ -33,12 +33,19 @@ public class BaseUnit : MonoBehaviour
     public List<AudioClip> clickOnSounds;
     public List<AudioClip> deathSounds;
     public List<AudioClip> reviveSounds;
+    public List<AudioClip> moveSounds;
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private Material defaultMaterial;
     [SerializeField]
     private Material selectMaterial;
+
+    private void MoveSoundPlay()
+    {
+        audioSource.clip = moveSounds[Random.Range(0, moveSounds.Count)];
+        audioSource.Play();
+    }
 
     private void DeathSoundPlay()
     {
@@ -151,6 +158,11 @@ public class BaseUnit : MonoBehaviour
             case EnemyBehaviour.Random:
                 allMoveable[Random.Range(0, allMoveable.Count - 1)].SetUnit(this);
                 break;
+        }
+        MoveSoundPlay();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
         }
         //enemy attack here
         List<Tile> allAttackable = GridManager.instance.GetAllAttackableTiles(curTile, attackRange, attackType);
