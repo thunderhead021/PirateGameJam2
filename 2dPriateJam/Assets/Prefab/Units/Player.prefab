@@ -204,8 +204,8 @@ MonoBehaviour:
   attackSounds:
   - {fileID: 8300000, guid: 68fd853b85a30ab46bf1e0bcc30eb39c, type: 3}
   - {fileID: 8300000, guid: d659ad031fb94814883a2e52a08730d0, type: 3}
-  reciveDamageSounds: []
-  clickOnSounds:
+  reciveDamageSounds:
+  - {fileID: 8300000, guid: 8f1e7ee6dad8ce34eb44cd441d80404b, type: 3}
   - {fileID: 8300000, guid: 2e0379b085506bf49a7a74f49ef54cfe, type: 3}
   - {fileID: 8300000, guid: f17a96fcee722e94bb28996bcb6c9e93, type: 3}
   - {fileID: 8300000, guid: c442742ec8c46f24dba141ee3ad9bc86, type: 3}
@@ -214,8 +214,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c62c880f2990a1143bc0c276cf4576e9, type: 3}
   - {fileID: 8300000, guid: 8aad02f011dde884e9324cb63a72bc00, type: 3}
   - {fileID: 8300000, guid: 1bc56a51dfffef343bc2806556dc5f25, type: 3}
-  deathSounds: []
-  reviveSounds: []
+  clickOnSounds:
+  - {fileID: 8300000, guid: 30801644a4b3a4044a6519a42ef7327f, type: 3}
+  - {fileID: 8300000, guid: 323cd87c2c3e0c5499a391666c5a84f1, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 99e9811384df2194fa4d6c111e85dd00, type: 3}
+  - {fileID: 8300000, guid: ad984f4bda4b0a3448d17b7ef1f259ac, type: 3}
+  - {fileID: 8300000, guid: 796eb73336a5164448f505d9046961de, type: 3}
+  - {fileID: 8300000, guid: 7bbe4da27c98f9c48b00e5eafd376146, type: 3}
+  reviveSounds:
+  - {fileID: 8300000, guid: a90253a960f96ba4c816499b58d61f0c, type: 3}
+  - {fileID: 8300000, guid: 50aaf4cad2be3d342ad653d96e939dce, type: 3}
+  - {fileID: 8300000, guid: defd88e7858ac1b4382a4a822ccfd5b1, type: 3}
+  - {fileID: 8300000, guid: a3e6646be2c61364487dd9b3cfc8c982, type: 3}
   spriteRenderer: {fileID: 8189682455004116233}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}

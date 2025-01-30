@@ -47,7 +47,15 @@ PrefabInstance:
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: PlayerSideSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 20e94e9cde6da4547ba9845ab19aadc0, type: 3}
+      objectReference: {fileID: 21300000, guid: 60f2fe3637c2b6c4bbf3c08b5e94b716, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: clickOnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b90e9f1d9d3d256419dddaff076989af, type: 3}
+    - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
+      propertyPath: clickOnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 80d1b9e52cb4e2e40881b8f76a6cf039, type: 3}
     - target: {fileID: 1944237986996834122, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

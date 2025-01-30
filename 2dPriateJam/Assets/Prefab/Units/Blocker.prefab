@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curTile: {fileID: 0}
   TurnIcon: {fileID: 21300000, guid: 4abf4962f4f044a46ac772213daa30e6, type: 3}
-  PlayerSideSprite: {fileID: 21300000, guid: 0f214f3bf096a8b4bb03249bf629ec2d, type: 3}
+  PlayerSideSprite: {fileID: 21300000, guid: 7d9e037c2453d6546a36ba84730598ba, type: 3}
   EnemySideSprite: {fileID: 21300000, guid: 1e41c0717a85ef14c82fdeabdf0b1545, type: 3}
   unitSide: 0
   Hp: 5
@@ -120,9 +120,19 @@ MonoBehaviour:
   attackSounds: []
   reciveDamageSounds:
   - {fileID: 8300000, guid: 137a369ce721ffe4ba1eee0ab6fe2dc7, type: 3}
-  clickOnSounds: []
-  deathSounds: []
-  reviveSounds: []
+  clickOnSounds:
+  - {fileID: 8300000, guid: b90e9f1d9d3d256419dddaff076989af, type: 3}
+  - {fileID: 8300000, guid: 80d1b9e52cb4e2e40881b8f76a6cf039, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 99e9811384df2194fa4d6c111e85dd00, type: 3}
+  - {fileID: 8300000, guid: ad984f4bda4b0a3448d17b7ef1f259ac, type: 3}
+  - {fileID: 8300000, guid: 796eb73336a5164448f505d9046961de, type: 3}
+  - {fileID: 8300000, guid: 7bbe4da27c98f9c48b00e5eafd376146, type: 3}
+  reviveSounds:
+  - {fileID: 8300000, guid: a90253a960f96ba4c816499b58d61f0c, type: 3}
+  - {fileID: 8300000, guid: 50aaf4cad2be3d342ad653d96e939dce, type: 3}
+  - {fileID: 8300000, guid: defd88e7858ac1b4382a4a822ccfd5b1, type: 3}
+  - {fileID: 8300000, guid: a3e6646be2c61364487dd9b3cfc8c982, type: 3}
   spriteRenderer: {fileID: 4077153346646935982}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectMaterial: {fileID: 2100000, guid: baf4c82692468704d8ecbcc706475a7f, type: 2}
