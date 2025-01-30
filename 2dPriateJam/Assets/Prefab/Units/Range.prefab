@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: attackType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1256204603387501590, guid: 5312c3f0cd608fe4aa1a2a39821eb90d, type: 3}
       propertyPath: AttackPower

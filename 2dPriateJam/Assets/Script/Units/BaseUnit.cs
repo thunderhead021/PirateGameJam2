@@ -125,7 +125,7 @@ public class BaseUnit : MonoBehaviour
         DeathSoundPlay();
         while (audioSource.isPlaying)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
         Destroy(gameObject);
     }
@@ -145,7 +145,7 @@ public class BaseUnit : MonoBehaviour
         ReviveSoundPlay();
         while (audioSource.isPlaying)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
         UpdateHp();
         SetSprite();
@@ -164,6 +164,7 @@ public class BaseUnit : MonoBehaviour
     IEnumerator EnemyMoveHelper() 
     {
         List<Tile> allMoveable = GridManager.instance.GetAllMoveableTiles(curTile, moveRange, moveType);
+        yield return new WaitForSeconds(2);
         switch (enemyBehaviour)
         {
             case EnemyBehaviour.Chaser:
@@ -182,7 +183,7 @@ public class BaseUnit : MonoBehaviour
         MoveSoundPlay();
         while (audioSource.isPlaying)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
         //enemy attack here
         List<Tile> allAttackable = GridManager.instance.GetAllAttackableTiles(curTile, attackRange, attackType);
@@ -203,8 +204,9 @@ public class BaseUnit : MonoBehaviour
         }
         while (audioSource.isPlaying)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
+        Move();
     }
 
     public void DealDamage(BaseUnit target, int amount, AttackEffect attackEffect) 
@@ -218,7 +220,7 @@ public class BaseUnit : MonoBehaviour
         target.Hp -= amount;
         while (audioSource.isPlaying)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
         if (target.Hp <= 0)
         {
@@ -232,7 +234,7 @@ public class BaseUnit : MonoBehaviour
             while (target.audioSource.isPlaying)
             {
                 target.DamageEffect();
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
             target.DamageEffect(true);
         }
@@ -290,12 +292,14 @@ public class BaseUnit : MonoBehaviour
         if (!hasMoved)
         {
             hasMoved = true;
+            spriteRenderer.color = new Color32(142, 129, 129, 255);
         }
     }
 
     public void ResetMove()
     {
         hasMoved = false;
+        spriteRenderer.color = Color.white;
     }
 
     private void ChaserMove(List<Tile> tileList) 

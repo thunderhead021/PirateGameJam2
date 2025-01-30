@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         GridManager.instance.GenerateGrid(levels[curLevel].percentageOfBlockingTileOutOf100, levels[curLevel].maxNumberOfSpecialTiles);
         SoundManager.instance.PlayBattleBGM();
         while(UIManager.instance.IsButtonStillPlaySound())
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         UIManager.instance.mainMenuScreen.SetActive(false);
         UIManager.instance.gameScreen.SetActive(true);
     }

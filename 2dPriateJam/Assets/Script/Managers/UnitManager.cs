@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -109,11 +110,31 @@ public class UnitManager : MonoBehaviour
 
     public void EnemyTurn() 
     {
-        foreach (BaseUnit unit in enemyUnits) 
+        StartCoroutine(EnemyTurnHelper());
+    }
+
+    IEnumerator EnemyTurnHelper() 
+    {
+        foreach (BaseUnit unit in enemyUnits)
         {
             unit.EnemyMove();
         }
+
+        while (!IsAllEnemyMoved())
+        {
+            yield return null;
+        }
         GameManager.instance.ChangeState(GameState.PlayerTurn);
+    }
+
+    private bool IsAllEnemyMoved() 
+    {
+        foreach (BaseUnit unit in enemyUnits)
+        {
+            if(!unit.hasMoved)
+                return false;
+        }
+        return true;
     }
 
     public void ResetMove() 

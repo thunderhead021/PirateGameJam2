@@ -107,6 +107,10 @@ public abstract class Tile : MonoBehaviour
                         //disable attack range
                         GridManager.instance.SetTilesAttackable(UnitManager.instance.SelectedUnit.curTile, UnitManager.instance.SelectedUnit.attackRange, UnitManager.instance.SelectedUnit.attackType, false);
                         UnitManager.instance.SelectedUnit.Move();
+                        while (curUnit.audioSource.isPlaying || UnitManager.instance.SelectedUnit.audioSource.isPlaying)
+                        {
+                            yield return new WaitForSeconds(0.1f);
+                        }
                         UnitManager.instance.SetSelectUnit();
                     }
                     else
@@ -116,7 +120,7 @@ public abstract class Tile : MonoBehaviour
                         UIManager.instance.SetSelectUnit(curUnit);
                         while (curUnit.audioSource.isPlaying)
                         {
-                            yield return null;
+                            yield return new WaitForSeconds(0.1f);
                         }
                         UnitManager.instance.SetSelectUnit();                  
                     }
