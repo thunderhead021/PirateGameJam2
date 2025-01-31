@@ -115,9 +115,9 @@ public abstract class Tile : MonoBehaviour
                     }
                     else
                     {
+                        UIManager.instance.SetSelectUnit(curUnit);
                         GridManager.instance.SetTilesMoveable(this, curUnit.moveRange, curUnit.moveType, true, true);
                         curUnit.MoveSoundPlay();
-                        UIManager.instance.SetSelectUnit(curUnit);
                         while (curUnit.audioSource.isPlaying)
                         {
                             yield return new WaitForSeconds(0.1f);
